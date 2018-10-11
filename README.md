@@ -5,8 +5,12 @@ Sistema de Controle de Biblioteca
 Requisitos Funcionais
 RF01 – o sistema deve permitir ao bibliotecário cadastrar livros contendo código, autor,
 categoria, ano, prioridade e disponibilidade.
+
+
 RF02 – o sistema deve permitir ao bibliotecário cadastrar usuários contendo código, nome,
 sexo, categoria, endereço e telefone.
+
+
 RF03 – o sistema deve permitir ao bibliotecário cadastrar empréstimos contendo código,
 código do livro, código do usuário, data de empréstimo e data de devolução.
 RF04 – o sistema deve permitir ao bibliotecário cadastrar multas contendo código, código do
