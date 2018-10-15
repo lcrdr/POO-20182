@@ -14,16 +14,15 @@ public class UsuarioDAO {
     public void insert(Usuario usuario) {
         Connection conn = ConnectionFactory.getConnection();
         try {
-            String sql = "INSERT INTO Usuario(codigo, nome, sexo, " +
+            String sql = "INSERT INTO Usuario(nome, sexo, " +
                     "endereco, telefone, codigocategoria) "
-                    + "VALUES (?, ?, ?, ?, ?, ?)";
+                    + "VALUES (?, ?, ?, ?, ?)";
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, usuario.getCodigo());
-            ps.setString(2, usuario.getNome());
-            ps.setBoolean(3, usuario.getSexo());
-            ps.setString(4, usuario.getEndereco());
-            ps.setString(5, usuario.getTelefone());
-            ps.setInt(6, usuario.getCategoria().getCodigo());
+            ps.setString(1, usuario.getNome());
+            ps.setBoolean(2, usuario.getSexo());
+            ps.setString(3, usuario.getEndereco());
+            ps.setString(4, usuario.getTelefone());
+            ps.setInt(5, usuario.getCategoria().getCodigo());
             ps.executeUpdate();
 
         } catch (SQLException e) {
@@ -85,12 +84,12 @@ public class UsuarioDAO {
             String sql = "UPDATE Usuario SET nome = ?, sexo = ?, " +
                     "endereco = ?, telefone = ?, codigocategoria = ? WHERE codigo = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, usuario.getCodigo());
-            ps.setString(2, usuario.getNome());
-            ps.setBoolean(3, usuario.getSexo());
-            ps.setString(4, usuario.getEndereco());
-            ps.setString(5, usuario.getTelefone());
-            ps.setInt(6, usuario.getCategoria().getCodigo());
+            ps.setString(1, usuario.getNome());
+            ps.setBoolean(2, usuario.getSexo());
+            ps.setString(3, usuario.getEndereco());
+            ps.setString(4, usuario.getTelefone());
+            ps.setInt(5, usuario.getCategoria().getCodigo());
+            ps.setInt(6, usuario.getCodigo());
             ps.executeUpdate();
 
         } catch (SQLException e) {
@@ -100,10 +99,10 @@ public class UsuarioDAO {
         }
     }
 
-    public Usuario getUsuario(String nome) {
+    public Usuario getUsuario(int id) {
         Connection conn = ConnectionFactory.getConnection();
         try {
-            String sql = "SELECT * FROM Usuario WHERE deletado IS NULL";
+            String sql = "SELECT * FROM Usuario WHERE codigo = " + id + " AND deletado IS NULL";
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
                 Usuario u = new Usuario();
