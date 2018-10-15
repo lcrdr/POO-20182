@@ -47,7 +47,7 @@ public class Livro {
         this.ano = ano;
     }
 
-    public boolean isDisponibilidade() {
+    public boolean getDisponibilidade() {
         return disponibilidade;
     }
 
