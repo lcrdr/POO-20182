@@ -1,8 +1,7 @@
 package view;
 
-public class Main {
-
+public class InterfaceUsuario {
     public static void main(String[] args) {
-	// write your code her
+        // TODO main para usuário
     }
 }

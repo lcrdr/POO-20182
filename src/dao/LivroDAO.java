@@ -1,5 +1,6 @@
 package dao;
 
+import model.Autor;
 import model.CategoriaLivro;
 import model.Livro;
 import model.Usuario;
@@ -17,8 +18,8 @@ public class LivroDAO {
         Connection conn = ConnectionFactory.getConnection();
         try {
             String sql = "INSERT INTO Livro(titulo, prioridade, " +
-                    "ano, disponibilidade) "
-                    + "VALUES (?, ?, ?, ?)";
+                    "ano) "
+                    + "VALUES (?, ?, ?)";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, livro.getTitulo());
             ps.setInt(2, livro.getPrioridade());
@@ -29,6 +30,15 @@ public class LivroDAO {
                 PreparedStatement ps2 = conn.prepareStatement(sql);
                 ps2.setInt(1, livro.getCodigo());
                 ps2.setInt(2, categoria.getCodigo());
+                ps.executeUpdate();
+            }
+
+            for (Autor autor : livro.getAutor()) {
+                String sql2 = "INSERT INTO LivroAutor(codigolivro, codigoautor) "
+                        + "VALUES (?, ?)";
+                PreparedStatement ps2 = conn.prepareStatement(sql);
+                ps2.setInt(1, livro.getCodigo());
+                ps2.setInt(2, autor.getCodigo());
                 ps.executeUpdate();
             }
 
