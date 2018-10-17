@@ -1,7 +1,6 @@
 package dao;
 
-import model.Autor;
-import model.Usuario;
+import model.CategoriaLivro;
 import util.ConnectionFactory;
 
 import java.sql.Connection;
@@ -11,14 +10,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AutorDAO {
-    public void insert(Autor autor) {
+public class CategoriaLivroDAO {
+    public void insert(CategoriaLivro categoriaLivro) {
         Connection conn = ConnectionFactory.getConnection();
         try {
-            String sql = "INSERT INTO Autor(nome) "
+            String sql = "INSERT INTO CategoriaLivro(nome) "
                     + "VALUES (?)";
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, autor.getNome());
+            ps.setString(1, categoriaLivro.getNome());
 
             ps.executeUpdate();
 
@@ -29,23 +28,22 @@ public class AutorDAO {
         }
     }
 
-    public List<Autor> listAutor() {
+    public List<CategoriaLivro> listCategoria() {
         Connection conn = ConnectionFactory.getConnection();
         try {
-            String sql = "SELECT * FROM Autor WHERE deletado IS NULL";
+            String sql = "SELECT * FROM CategoriaLivro";
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            List<Autor> autores = new ArrayList<>();
+            List<CategoriaLivro> categorias = new ArrayList<>();
             while (rs.next()) {
-                Autor a = new Autor();
-                a.setCodigo(rs.getInt(1));
-                a.setNome(rs.getString(2));
-                autores.add(a);
+                CategoriaLivro c = new CategoriaLivro();
+                c.setCodigo(rs.getInt(1));
+                c.setNome(rs.getString(2));
+                categorias.add(c);
             }
 
-
             conn.close();
-            return autores;
+            return categorias;
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -54,7 +52,7 @@ public class AutorDAO {
         }
     }
 
-    public void remove(int id) {
+    /*public void remove(int id) {
         Connection conn = ConnectionFactory.getConnection();
         try {
             String sql = "UPDATE Autor SET deletado = true WHERE id = ?";
@@ -67,16 +65,16 @@ public class AutorDAO {
         } finally {
             ConnectionFactory.close(conn);
         }
-    }
+    }*/
 
 
-    public void update(Autor autor) {
+    public void update(CategoriaLivro categoriaLivro) {
         Connection conn = ConnectionFactory.getConnection();
         try {
-            String sql = "UPDATE Autor SET nome = ? WHERE codigo = ?";
+            String sql = "UPDATE CategoriaLivro SET nome = ? WHERE codigo = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, autor.getNome());
-            ps.setInt(2, autor.getCodigo());
+            ps.setString(1, categoriaLivro.getNome());
+            ps.setInt(2, categoriaLivro.getCodigo());
             ps.executeUpdate();
 
         } catch (SQLException e) {
@@ -86,19 +84,19 @@ public class AutorDAO {
         }
     }
 
-    public Autor getAutor(int id) {
+    public CategoriaLivro getCategoria(int id) {
         Connection conn = ConnectionFactory.getConnection();
         try {
-            String sql = "SELECT * FROM Autor WHERE codigo = ? AND deletado IS NULL";
+            String sql = "SELECT * FROM CategoriaLivro WHERE codigo = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
-            Autor a = new Autor();
-            a.setCodigo(rs.getInt(1));
-            a.setNome(rs.getString(2));
+            CategoriaLivro c = new CategoriaLivro();
+            c.setCodigo(rs.getInt(1));
+            c.setNome(rs.getString(2));
 
             conn.close();
-            return a;
+            return c;
 
         } catch (SQLException e) {
             throw new RuntimeException(e);

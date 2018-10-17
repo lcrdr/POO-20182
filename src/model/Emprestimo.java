@@ -1,11 +1,11 @@
 package model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Emprestimo {
     private int codigo;
-    private Date dataEmprestimo;
-    private Date dataDevolucao;
+    private LocalDate dataEmprestimo;
+    private LocalDate dataDevolucao;
     private Livro livro;
     private Usuario usuario;
 
@@ -17,19 +17,19 @@ public class Emprestimo {
         this.codigo = codigo;
     }
 
-    public Date getDataEmprestimo() {
+    public LocalDate getDataEmprestimo() {
         return dataEmprestimo;
     }
 
-    public void setDataEmprestimo(Date dataEmprestimo) {
+    public void setDataEmprestimo(LocalDate dataEmprestimo) {
         this.dataEmprestimo = dataEmprestimo;
     }
 
-    public Date getDataDevolucao() {
+    public LocalDate getDataDevolucao() {
         return dataDevolucao;
     }
 
-    public void setDataDevolucao(Date dataDevolucao) {
+    public void setDataDevolucao(LocalDate dataDevolucao) {
         this.dataDevolucao = dataDevolucao;
     }
 
@@ -49,7 +49,7 @@ public class Emprestimo {
         this.usuario = usuario;
     }
 
-    public Emprestimo(int codigo, Date dataEmprestimo, Date dataDevolucao, Livro livro, Usuario usuario) {
+    public Emprestimo(int codigo, LocalDate dataEmprestimo, LocalDate dataDevolucao, Livro livro, Usuario usuario) {
         this.codigo = codigo;
         this.dataEmprestimo = dataEmprestimo;
         this.dataDevolucao = dataDevolucao;

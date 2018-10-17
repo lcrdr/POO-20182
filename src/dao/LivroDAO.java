@@ -43,29 +43,28 @@ public class LivroDAO {
         }
     }
 
-    /*
-    public List<Usuario> listUsuarios() {
+    public List<Livro> listLivros() {
         Connection conn = ConnectionFactory.getConnection();
         try {
-            String sql = "SELECT * FROM Usuario WHERE deletado IS NULL";
+            String sql = "SELECT * FROM Livro WHERE deletado IS NULL";
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            List<Usuario> usuarios = new ArrayList<>();
+            List<Livro> livros = new ArrayList<>();
             while (rs.next()) {
-                Usuario u = new Usuario();
-                u.setCodigo(rs.getInt(1));
-                u.setNome(rs.getString(2));
-                u.setSexo(rs.getBoolean(3));
-                u.setEndereco(rs.getString(4));
-                u.setTelefone(rs.getString(5));
-                //CategoriaUsuarioDAO cDAO = new CategoriaUsuarioDAO();
-                //u.setCategoria(cDAO.getCategoria(rs.getInt(6)));
-                usuarios.add(u);
+                Livro l = new Livro();
+                l.setCodigo(rs.getInt(1));
+                l.setTitulo(rs.getString(2));
+                l.setPrioridade(rs.getInt(3));
+                l.setAno(rs.getInt(4));
+                l.setDisponibilidade(rs.getBoolean(5));
+                //CategoriaLivro cDAO = new CategoriaLivroDAO();
+                //l.setCategoria(cDAO.getCategoria(rs.getInt(6)));
+                livros.add(l);
             }
 
 
             conn.close();
-            return usuarios;
+            return livros;
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -77,7 +76,7 @@ public class LivroDAO {
     public void remove(int id) {
         Connection conn = ConnectionFactory.getConnection();
         try {
-            String sql = "UPDATE Usuario SET deletado = true WHERE id = ?";
+            String sql = "UPDATE Livro SET deletado = true WHERE id = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
             ps.executeUpdate();
@@ -90,18 +89,17 @@ public class LivroDAO {
     }
 
 
-    public void update(Usuario usuario) {
+    public void update(Livro livro) {
         Connection conn = ConnectionFactory.getConnection();
         try {
-            String sql = "UPDATE Usuario SET nome = ?, sexo = ?, " +
-                    "endereco = ?, telefone = ?, codigocategoria = ? WHERE codigo = ?";
+            String sql = "UPDATE Livro SET titulo = ?, prioridade = ?, " +
+                    "ano = ?, disponibilidade = ? WHERE codigo = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, usuario.getNome());
-            ps.setBoolean(2, usuario.getSexo());
-            ps.setString(3, usuario.getEndereco());
-            ps.setString(4, usuario.getTelefone());
-            ps.setInt(5, usuario.getCategoria().getCodigo());
-            ps.setInt(6, usuario.getCodigo());
+            ps.setString(1, livro.getTitulo());
+            ps.setInt(2, livro.getPrioridade());
+            ps.setInt(3, livro.getAno());
+            ps.setBoolean(4, livro.getDisponibilidade());
+            ps.setInt(5, livro.getCodigo());
             ps.executeUpdate();
 
         } catch (SQLException e) {
@@ -111,28 +109,29 @@ public class LivroDAO {
         }
     }
 
-    public Usuario getUsuario(int id) {
+    public Livro getLivro(int id) {
         Connection conn = ConnectionFactory.getConnection();
         try {
-            String sql = "SELECT * FROM Usuario WHERE codigo = " + id + " AND deletado IS NULL";
+            String sql = "SELECT * FROM Livro WHERE codigo = ? AND deletado IS NULL";
             PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
-            Usuario u = new Usuario();
-            u.setCodigo(rs.getInt(1));
-            u.setNome(rs.getString(2));
-            u.setSexo(rs.getBoolean(3));
-            u.setEndereco(rs.getString(4));
-            u.setTelefone(rs.getString(5));
-            //CategoriaUsuarioDAO cDAO = new CategoriaUsuarioDAO();
-            //u.setCategoria(cDAO.getCategoria(rs.getInt(6)));
+            Livro l = new Livro();
+            l.setCodigo(rs.getInt(1));
+            l.setTitulo(rs.getString(2));
+            l.setPrioridade(rs.getInt(3));
+            l.setAno(rs.getInt(4));
+            l.setDisponibilidade(rs.getBoolean(5));
+            //CategoriaLivro cDAO = new CategoriaLivroDAO();
+            //l.setCategoria(cDAO.getCategoria(rs.getInt(6)));
 
             conn.close();
-            return u;
+            return l;
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
             ConnectionFactory.close(conn);
         }
-    } */
+    }
 }

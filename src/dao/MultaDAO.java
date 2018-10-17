@@ -1,7 +1,6 @@
 package dao;
 
-import model.Autor;
-import model.Usuario;
+import model.Multa;
 import util.ConnectionFactory;
 
 import java.sql.Connection;
@@ -11,14 +10,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AutorDAO {
-    public void insert(Autor autor) {
+public class MultaDAO {
+    public void insert(Multa multa) {
         Connection conn = ConnectionFactory.getConnection();
         try {
-            String sql = "INSERT INTO Autor(nome) "
-                    + "VALUES (?)";
+            String sql = "INSERT INTO Multa(codigousuario, descricao, valor) "
+                    + "VALUES (?, ?, ?)";
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, autor.getNome());
+            ps.setInt(1, multa.getUsuario().getCodigo());
+            ps.setString(2, multa.getDescricao());
+            ps.setDouble(3, multa.getValor());
 
             ps.executeUpdate();
 
@@ -29,23 +30,25 @@ public class AutorDAO {
         }
     }
 
-    public List<Autor> listAutor() {
+    public List<Multa> listMultas() {
         Connection conn = ConnectionFactory.getConnection();
         try {
-            String sql = "SELECT * FROM Autor WHERE deletado IS NULL";
+            String sql = "SELECT * FROM Multa WHERE deletado IS NULL";
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            List<Autor> autores = new ArrayList<>();
+            List<Multa> multas = new ArrayList<>();
             while (rs.next()) {
-                Autor a = new Autor();
-                a.setCodigo(rs.getInt(1));
-                a.setNome(rs.getString(2));
-                autores.add(a);
+                Multa m = new Multa();
+                m.setCodigo(rs.getInt(1));
+                /*UsuarioDAO uDAO = new UsuarioDAO();
+                m.setUsuario(uDAO.getUsuario(rs.getInt(2)));*/
+                m.setDescricao(rs.getString(3));
+                m.setValor(rs.getDouble(4));
+                multas.add(m);
             }
 
-
             conn.close();
-            return autores;
+            return multas;
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -57,7 +60,7 @@ public class AutorDAO {
     public void remove(int id) {
         Connection conn = ConnectionFactory.getConnection();
         try {
-            String sql = "UPDATE Autor SET deletado = true WHERE id = ?";
+            String sql = "UPDATE Multa SET deletado = true WHERE id = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
             ps.executeUpdate();
@@ -70,13 +73,14 @@ public class AutorDAO {
     }
 
 
-    public void update(Autor autor) {
+    public void update(Multa multa) {
         Connection conn = ConnectionFactory.getConnection();
         try {
-            String sql = "UPDATE Autor SET nome = ? WHERE codigo = ?";
+            String sql = "UPDATE Multa SET descricao = ?, valor = ? WHERE codigo = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, autor.getNome());
-            ps.setInt(2, autor.getCodigo());
+            ps.setString(1, multa.getDescricao());
+            ps.setDouble(2, multa.getValor());
+            ps.setInt(3, multa.getCodigo());
             ps.executeUpdate();
 
         } catch (SQLException e) {
@@ -86,19 +90,21 @@ public class AutorDAO {
         }
     }
 
-    public Autor getAutor(int id) {
+    public Multa getMulta(int id) {
         Connection conn = ConnectionFactory.getConnection();
         try {
-            String sql = "SELECT * FROM Autor WHERE codigo = ? AND deletado IS NULL";
+            String sql = "SELECT * FROM Multa WHERE codigo = ? AND deletado IS NULL";
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
-            Autor a = new Autor();
-            a.setCodigo(rs.getInt(1));
-            a.setNome(rs.getString(2));
+            Multa m = new Multa();
+            m.setCodigo(rs.getInt(1));
+            /*UsuarioDAO uDAO = new UsuarioDAO();
+            m.setUsuario(uDAO.getUsuario(rs.getInt(2)));*/
+            m.setDescricao(rs.getString(3));
+            m.setValor(rs.getDouble(4));
 
             conn.close();
-            return a;
+            return m;
 
         } catch (SQLException e) {
             throw new RuntimeException(e);

@@ -1,7 +1,6 @@
 package dao;
 
-import model.Autor;
-import model.Usuario;
+import model.CategoriaUsuario;
 import util.ConnectionFactory;
 
 import java.sql.Connection;
@@ -11,14 +10,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AutorDAO {
-    public void insert(Autor autor) {
+public class CategoriaUsuarioDAO {
+    public void insert(CategoriaUsuario categoriaUsuario) {
         Connection conn = ConnectionFactory.getConnection();
         try {
-            String sql = "INSERT INTO Autor(nome) "
-                    + "VALUES (?)";
+            String sql = "INSERT INTO CategoriaUsuario(nome,devolucao) "
+                    + "VALUES (?, ?)";
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, autor.getNome());
+            ps.setString(1, categoriaUsuario.getNome());
+            ps.setInt(2, categoriaUsuario.getDevolucao());
 
             ps.executeUpdate();
 
@@ -29,23 +29,24 @@ public class AutorDAO {
         }
     }
 
-    public List<Autor> listAutor() {
+    public List<CategoriaUsuario> listCategoria() {
         Connection conn = ConnectionFactory.getConnection();
         try {
-            String sql = "SELECT * FROM Autor WHERE deletado IS NULL";
+            String sql = "SELECT * FROM CategoriaUsuario";
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            List<Autor> autores = new ArrayList<>();
+            List<CategoriaUsuario> categorias = new ArrayList<>();
             while (rs.next()) {
-                Autor a = new Autor();
-                a.setCodigo(rs.getInt(1));
-                a.setNome(rs.getString(2));
-                autores.add(a);
+                CategoriaUsuario c = new CategoriaUsuario();
+                c.setCodigo(rs.getInt(1));
+                c.setNome(rs.getString(2));
+                c.setDevolucao(rs.getInt(3));
+                categorias.add(c);
             }
 
 
             conn.close();
-            return autores;
+            return categorias;
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -54,10 +55,11 @@ public class AutorDAO {
         }
     }
 
+    /*
     public void remove(int id) {
         Connection conn = ConnectionFactory.getConnection();
         try {
-            String sql = "UPDATE Autor SET deletado = true WHERE id = ?";
+            String sql = "UPDATE CategoriaUsuario SET deletado = true WHERE id = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
             ps.executeUpdate();
@@ -67,16 +69,16 @@ public class AutorDAO {
         } finally {
             ConnectionFactory.close(conn);
         }
-    }
+    }*/
 
-
-    public void update(Autor autor) {
+    public void update(CategoriaUsuario categoriaUsuario) {
         Connection conn = ConnectionFactory.getConnection();
         try {
-            String sql = "UPDATE Autor SET nome = ? WHERE codigo = ?";
+            String sql = "UPDATE CategoriaUsuario SET nome = ?, devolucao = ? WHERE codigo = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, autor.getNome());
-            ps.setInt(2, autor.getCodigo());
+            ps.setString(1, categoriaUsuario.getNome());
+            ps.setInt(2, categoriaUsuario.getDevolucao());
+            ps.setInt(3, categoriaUsuario.getCodigo());
             ps.executeUpdate();
 
         } catch (SQLException e) {
@@ -86,19 +88,20 @@ public class AutorDAO {
         }
     }
 
-    public Autor getAutor(int id) {
+    public CategoriaUsuario getCategoria(int id) {
         Connection conn = ConnectionFactory.getConnection();
         try {
-            String sql = "SELECT * FROM Autor WHERE codigo = ? AND deletado IS NULL";
+            String sql = "SELECT * FROM CategoriaUsuario WHERE codigo = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
-            Autor a = new Autor();
-            a.setCodigo(rs.getInt(1));
-            a.setNome(rs.getString(2));
+            CategoriaUsuario c = new CategoriaUsuario();
+            c.setCodigo(rs.getInt(1));
+            c.setNome(rs.getString(2));
+            c.setDevolucao(rs.getInt(3));
 
             conn.close();
-            return a;
+            return c;
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
