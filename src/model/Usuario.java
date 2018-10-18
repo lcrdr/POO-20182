@@ -67,4 +67,9 @@ public class Usuario {
 
     public Usuario() {
     }
+
+    @Override
+    public String toString() {
+        return getCodigo() + " " + getNome() + "\n" + getCategoria().getNome() + "\n" + (getSexo() == true ? "Masc" : "Fem") + "\n" + getEndereco() + "\n" + getTelefone();
+    }
 }

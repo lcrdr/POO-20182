@@ -86,4 +86,9 @@ public class Livro {
     public void removeCategoria(CategoriaLivro categoriaLivro) {
         this.categoria.remove(categoriaLivro);
     }
+
+    @Override
+    public String toString() {
+        return getCodigo() + " " + getTitulo() + "\n" + getAutor() + "\n" + getAno() + "\n" + (getDisponibilidade() == true ? "Disponível" : "Não disponível");
+    }
 }

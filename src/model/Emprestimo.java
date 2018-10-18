@@ -59,4 +59,9 @@ public class Emprestimo {
 
     public Emprestimo() {
     }
+
+    @Override
+    public String toString() {
+        return getCodigo() + " Emprestado por: " + getUsuario().getNome() + "\nLivro: " + getLivro().getTitulo() + "\nEmpréstimo em: " + getDataEmprestimo() + "\nDevolução: " + getDataDevolucao();
+    }
 }

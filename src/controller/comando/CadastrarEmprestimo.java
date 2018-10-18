@@ -30,5 +30,7 @@ public class CadastrarEmprestimo implements Command {
         entrada.nextLine();
 
         /*TODO alterar esquema de como funciona CategoriaUsuario para herança e assim usar Strategy (ou algum outro padrão)*/
+
+        dao.insert(emprestimo);
     }
 }

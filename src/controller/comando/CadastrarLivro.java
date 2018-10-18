@@ -42,6 +42,7 @@ public class CadastrarLivro implements Command {
             livro.addAutor(adao.getAutor(id));
         }while (id != 0);
 
+        dao.insert(livro);
 
     }
 }
