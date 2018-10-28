@@ -13,7 +13,7 @@ public class ConsultarLivros implements Command {
         LivroDAO dao = new LivroDAO();
         List<Livro> livros = dao.listLivros();
         for(Livro l : livros) {
-            System.out.println(l);
+            System.out.println(l.getTitulo());
         }
     }
 }

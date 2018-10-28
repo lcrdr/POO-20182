@@ -92,11 +92,13 @@ public class CategoriaLivroDAO {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             CategoriaLivro c = new CategoriaLivro();
-            c.setCodigo(rs.getInt(1));
-            c.setNome(rs.getString(2));
-
+            while(rs.next()) {
+                c.setCodigo(rs.getInt(1));
+                c.setNome(rs.getString(2));
+                return c;
+            }
             conn.close();
-            return c;
+            return null;
 
         } catch (SQLException e) {
             throw new RuntimeException(e);

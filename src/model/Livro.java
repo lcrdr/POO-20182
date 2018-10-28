@@ -1,15 +1,16 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Livro {
     private int codigo;
     private String titulo;
     private int prioridade;
-    private List<CategoriaLivro> categoria;
+    private List<CategoriaLivro> categoria = new ArrayList<>();
     private int ano;
     private boolean disponibilidade;
-    private List<Autor> autor;
+    private List<Autor> autor = new ArrayList<>();
 
     public int getCodigo() {
         return codigo;
@@ -91,4 +92,6 @@ public class Livro {
     public String toString() {
         return getCodigo() + " " + getTitulo() + "\n" + getAutor() + "\n" + getAno() + "\n" + (getDisponibilidade() == true ? "Disponível" : "Não disponível");
     }
+
+
 }

@@ -23,28 +23,26 @@ public class LivroDAO {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, livro.getTitulo());
             ps.setInt(2, livro.getPrioridade());
+            ps.setInt(3, livro.getAno());
+            ps.executeUpdate();
 
             for (CategoriaLivro categoria : livro.getCategoria()) {
                 String sql2 = "INSERT INTO LivroCategoria(codigolivro, codigocategoria) "
                         + "VALUES (?, ?)";
-                PreparedStatement ps2 = conn.prepareStatement(sql);
+                PreparedStatement ps2 = conn.prepareStatement(sql2);
                 ps2.setInt(1, livro.getCodigo());
                 ps2.setInt(2, categoria.getCodigo());
-                ps.executeUpdate();
+                ps2.executeUpdate();
             }
 
             for (Autor autor : livro.getAutor()) {
                 String sql2 = "INSERT INTO LivroAutor(codigolivro, codigoautor) "
                         + "VALUES (?, ?)";
-                PreparedStatement ps2 = conn.prepareStatement(sql);
+                PreparedStatement ps2 = conn.prepareStatement(sql2);
                 ps2.setInt(1, livro.getCodigo());
                 ps2.setInt(2, autor.getCodigo());
-                ps.executeUpdate();
+                ps2.executeUpdate();
             }
-
-            ps.setInt(3, livro.getAno());
-            ps.setBoolean(4, livro.getDisponibilidade());
-            ps.executeUpdate();
 
         } catch (SQLException e) {
             throw new RuntimeException(e);

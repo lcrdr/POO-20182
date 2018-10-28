@@ -89,16 +89,18 @@ public class AutorDAO {
     public Autor getAutor(int id) {
         Connection conn = ConnectionFactory.getConnection();
         try {
-            String sql = "SELECT * FROM Autor WHERE codigo = ? AND deletado IS NULL";
+            String sql = "SELECT * FROM Autor WHERE codigo = ? AND deletado = FALSE";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             Autor a = new Autor();
-            a.setCodigo(rs.getInt(1));
-            a.setNome(rs.getString(2));
-
+            if (rs.next()) {
+                a.setCodigo(rs.getInt(1));
+                a.setNome(rs.getString(2));
+                return a;
+            }
             conn.close();
-            return a;
+            return null;
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
