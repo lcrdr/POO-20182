@@ -1,6 +1,8 @@
 package view;
 
 import controller.comando.Command;
+import controller.comando.ConsultarLivros;
+import controller.comando.Sair;
 
 import java.util.Hashtable;
 import java.util.Scanner;
@@ -9,11 +11,9 @@ public class InterfaceUsuario {
 
         public static void menu() {
             System.out.println("Administração da Loja");
-            System.out.println("0 - ");
-            System.out.println("1 - ");
-            System.out.println("2 - ");
-            System.out.println("3 - ");
-            System.out.println("4 - ");
+            System.out.println("0 - Sair");
+            System.out.println("1 - Consultar Livro");
+            System.out.println("2 - Reservar Livro");
             System.out.println("Escolha uma opção:");
 
         }
@@ -26,9 +26,9 @@ public class InterfaceUsuario {
 
             Hashtable<Integer, Command> comandos =
                     new Hashtable<Integer, Command>();
-        /*comandos.put(1, );
-        comandos.put(4, );
-        comandos.put(0, );*/
+        comandos.put(1, new ConsultarLivros());
+        //comandos.put(2, new ReservarLivro());
+        comandos.put(0, new Sair());
 
             do {
                 menu();
