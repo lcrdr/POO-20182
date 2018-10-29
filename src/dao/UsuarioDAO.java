@@ -14,9 +14,7 @@ public class UsuarioDAO {
     public void insert(Usuario usuario) {
         Connection conn = ConnectionFactory.getConnection();
         try {
-            String sql = "INSERT INTO Usuario(nome, sexo, " +
-                    "endereco, telefone, codigocategoria) "
-                    + "VALUES (?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO Usuario(nome, sexo, endereco, telefone, codigocategoria) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, usuario.getNome());
             ps.setBoolean(2, usuario.getSexo());
@@ -35,7 +33,7 @@ public class UsuarioDAO {
    public List<Usuario> listUsuarios() {
         Connection conn = ConnectionFactory.getConnection();
         try {
-            String sql = "SELECT * FROM Usuario WHERE deletado IS NULL";
+            String sql = "SELECT * FROM Usuario WHERE deletado=FALSE";
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             List<Usuario> usuarios = new ArrayList<>();
@@ -65,7 +63,7 @@ public class UsuarioDAO {
     public void remove(int id) {
         Connection conn = ConnectionFactory.getConnection();
         try {
-            String sql = "UPDATE Usuario SET deletado = true WHERE id = ?";
+            String sql = "UPDATE Usuario SET deletado = true WHERE codigo = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
             ps.executeUpdate();
@@ -81,8 +79,7 @@ public class UsuarioDAO {
     public void update(Usuario usuario) {
         Connection conn = ConnectionFactory.getConnection();
         try {
-            String sql = "UPDATE Usuario SET nome = ?, sexo = ?, " +
-                    "endereco = ?, telefone = ?, codigocategoria = ? WHERE codigo = ?";
+            String sql = "UPDATE Usuario SET nome = ?, sexo = ?, endereco = ?, telefone = ?, codigocategoria = ? WHERE codigo = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, usuario.getNome());
             ps.setBoolean(2, usuario.getSexo());
@@ -102,9 +99,13 @@ public class UsuarioDAO {
     public Usuario getUsuario(int id) {
         Connection conn = ConnectionFactory.getConnection();
         try {
-            String sql = "SELECT * FROM Usuario WHERE codigo = " + id + " AND deletado IS NULL";
+            String sql = "SELECT * FROM Usuario WHERE codigo = ? AND deletado=FALSE";
             PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
+            conn.close();
+
+            if(rs.next()){
                 Usuario u = new Usuario();
                 u.setCodigo(rs.getInt(1));
                 u.setNome(rs.getString(2));
@@ -114,8 +115,10 @@ public class UsuarioDAO {
                 //CategoriaUsuarioDAO cDAO = new CategoriaUsuarioDAO();
                 //u.setCategoria(cDAO.getCategoria(rs.getInt(6)));
 
-            conn.close();
-            return u;
+                return u;
+            }else{
+                return null;
+            }
 
         } catch (SQLException e) {
             throw new RuntimeException(e);

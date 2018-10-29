@@ -11,8 +11,7 @@ public class EmprestimoDAO {
     public void insert(Emprestimo emprestimo) {
         Connection conn = ConnectionFactory.getConnection();
         try {
-            String sql = "INSERT INTO Emprestimo(dataemprestimo, datadevolucao, codigolivro, codigousuario) "
-                    + "VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO Emprestimo(dataemprestimo, datadevolucao, codigolivro, codigousuario) VALUES (?, ?, ?, ?)";
             PreparedStatement ps = conn.prepareStatement(sql);
             Date dataEmprestimo = Date.valueOf(emprestimo.getDataEmprestimo());
             ps.setDate(1, dataEmprestimo);
@@ -33,7 +32,7 @@ public class EmprestimoDAO {
     public List<Emprestimo> listEmprestimos() {
         Connection conn = ConnectionFactory.getConnection();
         try {
-            String sql = "SELECT * FROM Emprestimo WHERE deletado IS NULL";
+            String sql = "SELECT * FROM Emprestimo WHERE deletado=FALSE";
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             List<Emprestimo> emprestimos = new ArrayList<>();
@@ -62,7 +61,7 @@ public class EmprestimoDAO {
     public void remove(int id) {
         Connection conn = ConnectionFactory.getConnection();
         try {
-            String sql = "UPDATE Emprestimo SET deletado = true WHERE id = ?";
+            String sql = "UPDATE Emprestimo SET deletado = true WHERE codigo = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
             ps.executeUpdate();
@@ -96,20 +95,25 @@ public class EmprestimoDAO {
     public Emprestimo getEmprestimo(int id) {
         Connection conn = ConnectionFactory.getConnection();
         try {
-            String sql = "SELECT * FROM Emprestimo WHERE codigo = ? AND deletado IS NULL";
+            String sql = "SELECT * FROM Emprestimo WHERE codigo = ? AND deletado=FALSE";
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            Emprestimo e = new Emprestimo();
-            e.setCodigo(rs.getInt(1));
-            e.setDataEmprestimo(rs.getDate(2).toLocalDate());
-            e.setDataDevolucao(rs.getDate(3).toLocalDate());
-            /*LivroDAO lDAO = new LivroDAO();
-            e.setLivro(lDAO.getLivro(rs.getInt(4)));*/
-            /*UsuarioDAO uDAO = new UsuarioDAO();
-            e.setUsuario(uDAO.getUsuario(rs.getInt(5)));*/
-
             conn.close();
-            return e;
+
+            if(rs.next()) {
+                Emprestimo e = new Emprestimo();
+                e.setCodigo(rs.getInt(1));
+                e.setDataEmprestimo(rs.getDate(2).toLocalDate());
+                e.setDataDevolucao(rs.getDate(3).toLocalDate());
+                /*LivroDAO lDAO = new LivroDAO();
+                e.setLivro(lDAO.getLivro(rs.getInt(4)));*/
+                /*UsuarioDAO uDAO = new UsuarioDAO();
+                e.setUsuario(uDAO.getUsuario(rs.getInt(5)));*/
+
+                return e;
+            }else{
+                return null;
+            }
 
         } catch (SQLException e) {
             throw new RuntimeException(e);

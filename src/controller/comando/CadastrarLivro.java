@@ -21,7 +21,7 @@ public class CadastrarLivro implements Command {
         livro.setPrioridade(entrada.nextInt());
         entrada.nextLine();
         System.out.println("Entre com o ano de lançamento do livro:");
-        livro.setPrioridade(entrada.nextInt());
+        livro.setAno(entrada.nextInt());
         entrada.nextLine();
 
         CategoriaLivroDAO cdao = new CategoriaLivroDAO();

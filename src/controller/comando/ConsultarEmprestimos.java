@@ -14,5 +14,7 @@ public class ConsultarEmprestimos implements Command {
         for(Emprestimo e : emprestimos) {
             System.out.println(e);
         }
+        System.out.println("Pressione enter para continuar...");
+        entrada.nextLine();
     }
 }

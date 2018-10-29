@@ -7,29 +7,25 @@ import java.util.Scanner;
 
 public class InterfaceBibliotecario {
 
-    public static void menu() {
+    private static void menu() {
         System.out.println("0 - Sair\n");
 
-        System.out.println("<-- Gerenciar Livros -->\n");
-        System.out.println("1 - Cadastrar Livro\n");
-        System.out.println("2 - Alterar Livro\n");
-        System.out.println("3 - Excluir Livro\n");
-        System.out.println("4 - Consultar Livro\n");
-        System.out.println("\n");
-        System.out.println("<-- Gerenciar Usuarios -->\n");
-        System.out.println("5 - Cadastrar Usuario\n");
-        System.out.println("6 - Alterar Usuario\n");
-        System.out.println("7 - Excluir Usuario\n");
-        System.out.println("8 - Consultar Usuario\n");
-        System.out.println("\n");
-        System.out.println("<-- Gerenciar Emprestimos -->\n");
-        System.out.println("9 - Cadastrar Emprestimo\n");
-        System.out.println("10 - Consultar Emprestimo\n");
-        System.out.println("\n");
-        System.out.println("<-- Gerenciar Multas -->\n");
-        System.out.println("11 - Cadastrar Multa\n");
-        System.out.println("\n");
-        System.out.println("Escolha uma opção:");
+        System.out.println("<-- Gerenciar Livros -->");
+        System.out.println("1 - Cadastrar Livro");
+        System.out.println("2 - Alterar Livro");
+        System.out.println("3 - Excluir Livro");
+        System.out.println("4 - Consultar Livros");
+        System.out.println("\n<-- Gerenciar Usuários -->");
+        System.out.println("5 - Cadastrar Usuário");
+        System.out.println("6 - Alterar Usuário");
+        System.out.println("7 - Excluir Usuário");
+        System.out.println("8 - Consultar Usuários");
+        System.out.println("\n<-- Gerenciar Empréstimos -->");
+        System.out.println("9 - Cadastrar Empréstimo");
+        System.out.println("10 - Consultar Empréstimo");
+        System.out.println("\n<-- Gerenciar Multas -->");
+        System.out.println("11 - Cadastrar Multa");
+        System.out.println("\nEscolha uma opção:");
 
     }
 
@@ -39,8 +35,7 @@ public class InterfaceBibliotecario {
         int opcao = 0;
         Scanner entrada = new Scanner(System.in);
 
-        Hashtable<Integer, Command> comandos =
-                new Hashtable<Integer, Command>();
+        Hashtable<Integer, Command> comandos = new Hashtable<Integer, Command>();
         comandos.put(1, new CadastrarLivro());
         comandos.put(2, new AlterarLivro());
         comandos.put(3, new RemoverLivro());
@@ -61,6 +56,7 @@ public class InterfaceBibliotecario {
         do {
             menu();
             opcao = entrada.nextInt();
+            entrada.nextLine();
             comandos.get(opcao).execute(entrada);
 
         } while (opcao != 0);

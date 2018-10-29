@@ -15,5 +15,7 @@ public class ConsultarUsuarios implements Command {
         for(Usuario u : usuarios) {
             System.out.println(u);
         }
+        System.out.println("Pressione enter para continuar...");
+        entrada.nextLine();
     }
 }

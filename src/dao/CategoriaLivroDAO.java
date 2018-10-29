@@ -14,8 +14,7 @@ public class CategoriaLivroDAO {
     public void insert(CategoriaLivro categoriaLivro) {
         Connection conn = ConnectionFactory.getConnection();
         try {
-            String sql = "INSERT INTO CategoriaLivro(nome) "
-                    + "VALUES (?)";
+            String sql = "INSERT INTO CategoriaLivro(nome) VALUES (?)";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, categoriaLivro.getNome());
 
@@ -55,7 +54,7 @@ public class CategoriaLivroDAO {
     /*public void remove(int id) {
         Connection conn = ConnectionFactory.getConnection();
         try {
-            String sql = "UPDATE Autor SET deletado = true WHERE id = ?";
+            String sql = "UPDATE Autor SET deletado = true WHERE codigo = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
             ps.executeUpdate();
@@ -91,15 +90,16 @@ public class CategoriaLivroDAO {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
-            CategoriaLivro c = new CategoriaLivro();
-            while(rs.next()) {
+            conn.close();
+
+            if(rs.next()) {
+                CategoriaLivro c = new CategoriaLivro();
                 c.setCodigo(rs.getInt(1));
                 c.setNome(rs.getString(2));
                 return c;
+            }else{
+                return null;
             }
-            conn.close();
-            return null;
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {

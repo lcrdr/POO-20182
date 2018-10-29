@@ -14,8 +14,7 @@ public class MultaDAO {
     public void insert(Multa multa) {
         Connection conn = ConnectionFactory.getConnection();
         try {
-            String sql = "INSERT INTO Multa(codigousuario, descricao, valor) "
-                    + "VALUES (?, ?, ?)";
+            String sql = "INSERT INTO Multa(codigousuario, descricao, valor) VALUES (?, ?, ?)";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, multa.getUsuario().getCodigo());
             ps.setString(2, multa.getDescricao());
@@ -33,7 +32,7 @@ public class MultaDAO {
     public List<Multa> listMultas() {
         Connection conn = ConnectionFactory.getConnection();
         try {
-            String sql = "SELECT * FROM Multa WHERE deletado IS NULL";
+            String sql = "SELECT * FROM Multa WHERE deletado=FALSE";
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             List<Multa> multas = new ArrayList<>();
@@ -60,7 +59,7 @@ public class MultaDAO {
     public void remove(int id) {
         Connection conn = ConnectionFactory.getConnection();
         try {
-            String sql = "UPDATE Multa SET deletado = true WHERE id = ?";
+            String sql = "UPDATE Multa SET deletado = true WHERE codigo = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
             ps.executeUpdate();
@@ -93,18 +92,23 @@ public class MultaDAO {
     public Multa getMulta(int id) {
         Connection conn = ConnectionFactory.getConnection();
         try {
-            String sql = "SELECT * FROM Multa WHERE codigo = ? AND deletado IS NULL";
+            String sql = "SELECT * FROM Multa WHERE codigo = ? AND deletado=FALSE";
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            Multa m = new Multa();
-            m.setCodigo(rs.getInt(1));
-            /*UsuarioDAO uDAO = new UsuarioDAO();
-            m.setUsuario(uDAO.getUsuario(rs.getInt(2)));*/
-            m.setDescricao(rs.getString(3));
-            m.setValor(rs.getDouble(4));
-
             conn.close();
-            return m;
+
+            if(rs.next()) {
+                Multa m = new Multa();
+                m.setCodigo(rs.getInt(1));
+                /*UsuarioDAO uDAO = new UsuarioDAO();
+                m.setUsuario(uDAO.getUsuario(rs.getInt(2)));*/
+                m.setDescricao(rs.getString(3));
+                m.setValor(rs.getDouble(4));
+
+                return m;
+            }else{
+                return null;
+            }
 
         } catch (SQLException e) {
             throw new RuntimeException(e);

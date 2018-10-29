@@ -18,7 +18,7 @@ public class AlterarLivro implements Command {
         livro.setPrioridade(entrada.nextInt());
         entrada.nextLine();
         System.out.println("Entre com o ano de lançamento do livro:");
-        livro.setPrioridade(entrada.nextInt());
+        livro.setAno(entrada.nextInt());
         entrada.nextLine();
         dao.update(livro);
     }

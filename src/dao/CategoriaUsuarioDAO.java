@@ -14,8 +14,7 @@ public class CategoriaUsuarioDAO {
     public void insert(CategoriaUsuario categoriaUsuario) {
         Connection conn = ConnectionFactory.getConnection();
         try {
-            String sql = "INSERT INTO CategoriaUsuario(nome,devolucao) "
-                    + "VALUES (?, ?)";
+            String sql = "INSERT INTO CategoriaUsuario(nome,devolucao) VALUES (?, ?)";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, categoriaUsuario.getNome());
             ps.setInt(2, categoriaUsuario.getDevolucao());
@@ -59,7 +58,7 @@ public class CategoriaUsuarioDAO {
     public void remove(int id) {
         Connection conn = ConnectionFactory.getConnection();
         try {
-            String sql = "UPDATE CategoriaUsuario SET deletado = true WHERE id = ?";
+            String sql = "UPDATE CategoriaUsuario SET deletado = true WHERE codigo = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
             ps.executeUpdate();
@@ -95,13 +94,18 @@ public class CategoriaUsuarioDAO {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
-            CategoriaUsuario c = new CategoriaUsuario();
-            c.setCodigo(rs.getInt(1));
-            c.setNome(rs.getString(2));
-            c.setDevolucao(rs.getInt(3));
-
             conn.close();
-            return c;
+
+            if(rs.next()) {
+                CategoriaUsuario c = new CategoriaUsuario();
+                c.setCodigo(rs.getInt(1));
+                c.setNome(rs.getString(2));
+                c.setDevolucao(rs.getInt(3));
+
+                return c;
+            }else{
+                return null;
+            }
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
