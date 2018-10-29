@@ -47,5 +47,6 @@ public class CadastrarLivro implements Command {
         }while (id != 0);
 
         dao.insert(livro);
+        System.out.println("Livro cadastrado com sucesso!");
     }
 }
