@@ -24,6 +24,8 @@ public class LivroDAO {
             ps.setInt(3, livro.getAno());
             ps.executeUpdate();
 
+            livro.setCodigo(getLast());
+
             for (CategoriaLivro categoria : livro.getCategoria()) {
                 String sql2 = "INSERT INTO LivroCategoria(codigolivro, codigocategoria) VALUES (?, ?)";
                 PreparedStatement ps2 = conn.prepareStatement(sql2);
@@ -140,5 +142,21 @@ public class LivroDAO {
         } finally {
             ConnectionFactory.close(conn);
         }
+    }
+
+    private int getLast() throws SQLException {
+        Connection conn = ConnectionFactory.getConnection();
+
+        String sql = "SELECT MAX(codigo) from Livro";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        conn.close();
+
+        if(rs.next()) {
+            int id = rs.getInt(1);
+            return id;
+        }
+
+        return 0;
     }
 }

@@ -16,7 +16,7 @@ public class CadastrarLivro implements Command {
         LivroDAO dao = new LivroDAO();
         Livro livro = new Livro();
         System.out.println("Entre com o título do livro:");
-        livro.setTitulo(entrada.next());
+        livro.setTitulo(entrada.nextLine());
         System.out.println("Entre com a prioridade do livro:\n1 - baixa\n2 - média\n3 - alta):");
         livro.setPrioridade(entrada.nextInt());
         entrada.nextLine();
@@ -30,6 +30,7 @@ public class CadastrarLivro implements Command {
         do {
             System.out.println("Digite o id da categoria do livro ou 0 para sair:");
             id = entrada.nextInt();
+            entrada.nextLine();
             if(id != 0)
                 livro.addCategoria(cdao.getCategoria(id));
         }while (id != 0);
@@ -39,10 +40,10 @@ public class CadastrarLivro implements Command {
         do {
             System.out.println("Entre com o id do autor do livro ou 0 para sair:");
             id = entrada.nextInt();
+            entrada.nextLine();
 
             if(id != 0) {
                 Autor a = adao.getAutor(id);
-                System.out.println(a.getCodigo() + a.getNome());
                 livro.addAutor(a);}
         }while (id != 0);
 
