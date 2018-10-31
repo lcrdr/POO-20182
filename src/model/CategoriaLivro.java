@@ -32,4 +32,9 @@ public class CategoriaLivro {
     public boolean equals(Object o) {
         return ((CategoriaLivro)o).getCodigo() == getCodigo();
     }
+
+    @Override
+    public String toString() {
+        return this.nome;
+    }
 }

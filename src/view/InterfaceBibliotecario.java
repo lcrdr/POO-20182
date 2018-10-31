@@ -11,9 +11,9 @@ public class InterfaceBibliotecario {
         System.out.println("0 - Sair\n");
 
         System.out.println("<-- Gerenciar Livros -->");
-        System.out.println("1 - Cadastrar Livro");
-        System.out.println("2 - Alterar Livro");
-        System.out.println("3 - Excluir Livro");
+        System.out.println("1 - Cadastrar Livro"); //ok
+        System.out.println("2 - Alterar Livro"); //ok
+        System.out.println("3 - Excluir Livro"); //ok
         System.out.println("4 - Consultar Livros");
         System.out.println("\n<-- Gerenciar Usuários -->");
         System.out.println("5 - Cadastrar Usuário");

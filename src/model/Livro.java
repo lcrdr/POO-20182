@@ -88,9 +88,17 @@ public class Livro {
         this.categoria.remove(categoriaLivro);
     }
 
+    public void setCategoria(List<CategoriaLivro> categoria) {
+        this.categoria = categoria;
+    }
+
+    public void setAutor(List<Autor> autor) {
+        this.autor = autor;
+    }
+
     @Override
     public String toString() {
-        return getCodigo() + " " + getTitulo() + "\n" + getAutor() + "\n" + getAno() + "\n" + (getDisponibilidade() == true ? "Disponível" : "Não disponível");
+        return "Codigo:" + getCodigo() + "\n" + "Titulo:" + getTitulo() + "\n" + "Categoria(s):" + getCategoria() + "\n" +  "Autor(es):" + getAutor() + "\n" + "Ano:" + getAno() + "\n" + "Disponibilidade:" + (getDisponibilidade() == true ? "Disponível" : "Não disponível");
     }
 
 

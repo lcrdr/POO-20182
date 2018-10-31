@@ -32,4 +32,9 @@ public class Autor {
     public boolean equals(Object o) {
         return ((Autor)o).getCodigo() == getCodigo();
     }
+
+    @Override
+    public String toString() {
+        return this.nome;
+    }
 }
