@@ -6,16 +6,18 @@ import model.Livro;
 import java.util.List;
 import java.util.Scanner;
 
-public class ConsultarLivroId implements Command {
+public class ConsultarLivroCategoria implements Command{
+
     @Override
     public void execute(Scanner entrada) {
-        System.out.println("Digite o id do livro: ");
+        System.out.println("Digite o id da categoria dos livros: ");
 
         LivroDAO dao = new LivroDAO();
         int id = entrada.nextInt();
-        List<Livro> livros = dao.listLivros(id);
+        List<Livro> livros = dao.listLivrosCategoria(id);
         for(Livro l : livros) {
             System.out.println(l);
+            System.out.println("\n");
         }
         System.out.println("Pressione enter para continuar...");
         entrada.nextLine();

@@ -10,12 +10,11 @@ import java.util.Scanner;
 public class InterfaceUsuario {
 
         public static void menu() {
-            System.out.println("Administração da Loja");
+            System.out.println("<--- Biblioteca --->");
             System.out.println("0 - Sair");
             System.out.println("1 - Consultar Livro");
             System.out.println("2 - Reservar Livro");
             System.out.println("Escolha uma opção:");
-
         }
 
         public static void main(String[] args) {

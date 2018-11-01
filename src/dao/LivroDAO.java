@@ -108,12 +108,72 @@ public class LivroDAO {
         }
     }
 
-    public List<Livro> listLivros(int id) {
+    public List<Livro> listLivros(int autor) {
         Connection conn = ConnectionFactory.getConnection();
         try {
-            String sql = "SELECT * FROM Livro WHERE codigo = ? AND deletado=FALSE";
+            String sql = "SELECT L.* FROM ((LivroAutor LA JOIN Autor A ON LA.codigoautor = A.codigo) JOIN Livro L ON LA.codigolivro = L.codigo) WHERE A.codigo = ? AND L.deletado=FALSE";
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, id);
+            ps.setInt(1, autor);
+            ResultSet rs = ps.executeQuery();
+            conn.close();
+            List<Livro> livros = new ArrayList<>();
+            while (rs.next()) {
+                Livro l = new Livro();
+                l.setCodigo(rs.getInt(1));
+                l.setTitulo(rs.getString(2));
+                l.setPrioridade(rs.getInt(3));
+                l.setAno(rs.getInt(4));
+                l.setDisponibilidade(rs.getBoolean(5));
+                l.setCategoria(getCategorias(l.getCodigo()));
+                l.setAutor(getAutor(l.getCodigo()));
+                livros.add(l);
+            }
+
+            return livros;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            ConnectionFactory.close(conn);
+        }
+    }
+
+    public List<Livro> listLivros(boolean disponibilidade) {
+        Connection conn = ConnectionFactory.getConnection();
+        try {
+            String sql = "SELECT * FROM Livro WHERE disponibilidade = ? AND deletado=FALSE";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setBoolean(1, disponibilidade);
+            ResultSet rs = ps.executeQuery();
+            conn.close();
+            List<Livro> livros = new ArrayList<>();
+            while (rs.next()) {
+                Livro l = new Livro();
+                l.setCodigo(rs.getInt(1));
+                l.setTitulo(rs.getString(2));
+                l.setPrioridade(rs.getInt(3));
+                l.setAno(rs.getInt(4));
+                l.setDisponibilidade(rs.getBoolean(5));
+                l.setCategoria(getCategorias(l.getCodigo()));
+                l.setAutor(getAutor(l.getCodigo()));
+                livros.add(l);
+            }
+
+            return livros;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            ConnectionFactory.close(conn);
+        }
+    }
+
+    public List<Livro> listLivrosCategoria(int categoria) {
+        Connection conn = ConnectionFactory.getConnection();
+        try {
+            String sql = "SELECT L.* FROM LivroCategoria LC JOIN Livro L ON LC.codigolivro = L.codigo WHERE LC.codigocategoria = ? AND L.deletado=FALSE";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, categoria);
             ResultSet rs = ps.executeQuery();
             conn.close();
             List<Livro> livros = new ArrayList<>();
