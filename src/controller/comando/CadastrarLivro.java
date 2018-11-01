@@ -3,17 +3,21 @@ package controller.comando;
 import dao.AutorDAO;
 import dao.CategoriaLivroDAO;
 import dao.LivroDAO;
+import dao.proxy.AutorDAOProxy;
+import dao.proxy.CategoriaLivroDAOProxy;
+import dao.proxy.LivroDAOProxy;
 import model.Autor;
 import model.CategoriaLivro;
 import model.Livro;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class CadastrarLivro implements Command {
 
     @Override
     public void execute(Scanner entrada) {
-        LivroDAO dao = new LivroDAO();
+        LivroDAO dao = LivroDAOProxy.getInstance();
         Livro livro = new Livro();
         System.out.println("Entre com o título do livro:");
         livro.setTitulo(entrada.nextLine());
@@ -24,27 +28,35 @@ public class CadastrarLivro implements Command {
         livro.setAno(entrada.nextInt());
         entrada.nextLine();
 
-        CategoriaLivroDAO cdao = new CategoriaLivroDAO();
+        CategoriaLivroDAO cdao = CategoriaLivroDAOProxy.getInstance();
         int id = 0;
 
         do {
             System.out.println("Digite o id da categoria do livro ou 0 para sair:");
+            List<CategoriaLivro> categorias = cdao.listCategoria();
+            for(CategoriaLivro c : categorias){
+                System.out.println(c);
+            }
             id = entrada.nextInt();
             entrada.nextLine();
             if(id != 0)
                 livro.addCategoria(cdao.getCategoria(id));
+
         }while (id != 0);
 
-        AutorDAO adao = new AutorDAO();
+        AutorDAO adao = AutorDAOProxy.getInstance();
 
         do {
             System.out.println("Entre com o id do autor do livro ou 0 para sair:");
+            List<Autor> autores = adao.listAutor();
+            for(Autor a : autores){
+                System.out.println(a);
+            }
             id = entrada.nextInt();
             entrada.nextLine();
+            if(id != 0)
+                livro.addAutor(adao.getAutor(id));
 
-            if(id != 0) {
-                Autor a = adao.getAutor(id);
-                livro.addAutor(a);}
         }while (id != 0);
 
         dao.insert(livro);

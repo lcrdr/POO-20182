@@ -2,6 +2,7 @@ package controller.comando;
 
 import dao.CategoriaUsuarioDAO;
 import dao.UsuarioDAO;
+import dao.proxy.UsuarioDAOProxy;
 import model.CategoriaUsuario;
 import model.Usuario;
 
@@ -11,7 +12,7 @@ public class CadastrarUsuario implements Command {
 
     @Override
     public void execute(Scanner entrada) {
-        UsuarioDAO dao = new UsuarioDAO();
+        UsuarioDAO dao = UsuarioDAOProxy.getInstance();
         Usuario usuario = new Usuario();
         System.out.println("Entre com o nome do usuário:");
         usuario.setNome(entrada.nextLine());

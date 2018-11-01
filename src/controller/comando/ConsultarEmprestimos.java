@@ -1,6 +1,7 @@
 package controller.comando;
 
 import dao.EmprestimoDAO;
+import dao.proxy.EmprestimoDAOProxy;
 import model.Emprestimo;
 
 import java.util.List;
@@ -9,8 +10,8 @@ import java.util.Scanner;
 public class ConsultarEmprestimos implements Command {
     @Override
     public void execute(Scanner entrada) {
-        EmprestimoDAO dao = new EmprestimoDAO();
-        List<Emprestimo> emprestimos = dao.listEmprestimos();
+        EmprestimoDAO dao = EmprestimoDAOProxy.getInstance();
+        List<Emprestimo> emprestimos = dao.listEmprestimo();
         for(Emprestimo e : emprestimos) {
             System.out.println(e);
         }

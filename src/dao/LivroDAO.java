@@ -49,7 +49,7 @@ public class LivroDAO {
         }
     }
 
-    public List<Livro> listLivros() {
+    public List<Livro> listLivro() {
         Connection conn = ConnectionFactory.getConnection();
         try {
             String sql = "SELECT * FROM Livro WHERE deletado=FALSE";
@@ -78,12 +78,12 @@ public class LivroDAO {
         }
     }
 
-    public List<Livro> listLivros(String nome) {
+    public List<Livro> listLivro(String nome) {
         Connection conn = ConnectionFactory.getConnection();
         try {
-            String sql = "SELECT * FROM Livro WHERE titulo LIKE ? AND deletado=FALSE";
+            String sql = "SELECT * FROM Livro WHERE UCASE(titulo) LIKE UCASE(?) AND deletado=FALSE";
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, nome);
+            ps.setString(1, "%" + nome + "%");
             ResultSet rs = ps.executeQuery();
             conn.close();
             List<Livro> livros = new ArrayList<>();
@@ -108,7 +108,7 @@ public class LivroDAO {
         }
     }
 
-    public List<Livro> listLivros(int autor) {
+    public List<Livro> listLivro(int autor) {
         Connection conn = ConnectionFactory.getConnection();
         try {
             String sql = "SELECT L.* FROM ((LivroAutor LA JOIN Autor A ON LA.codigoautor = A.codigo) JOIN Livro L ON LA.codigolivro = L.codigo) WHERE A.codigo = ? AND L.deletado=FALSE";
@@ -138,7 +138,7 @@ public class LivroDAO {
         }
     }
 
-    public List<Livro> listLivros(boolean disponibilidade) {
+    public List<Livro> listLivro(boolean disponibilidade) {
         Connection conn = ConnectionFactory.getConnection();
         try {
             String sql = "SELECT * FROM Livro WHERE disponibilidade = ? AND deletado=FALSE";
@@ -357,8 +357,7 @@ public class LivroDAO {
         conn.close();
 
         if(rs.next()) {
-            int id = rs.getInt(1);
-            return id;
+            return rs.getInt(1);
         }
 
         return 0;

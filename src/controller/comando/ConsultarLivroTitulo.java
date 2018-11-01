@@ -6,15 +6,15 @@ import model.Livro;
 import java.util.List;
 import java.util.Scanner;
 
-public class ConsultarLivroDisponibilidade implements Command {
+public class ConsultarLivroTitulo implements Command {
     @Override
     public void execute(Scanner entrada) {
-        System.out.println("Digite (1) para disponiveis e (2) para não disponiveis:  ");
+        System.out.println("Digite o nome do livro: ");
 
         LivroDAO dao = new LivroDAO();
-        boolean disponibilidade = (entrada.nextInt() == 1);
-        entrada.nextLine();
-        List<Livro> livros = dao.listLivro(disponibilidade);
+        String nome = entrada.nextLine();
+
+        List<Livro> livros = dao.listLivro(nome);
         for(Livro l : livros) {
             System.out.println(l);
             System.out.println("\n");

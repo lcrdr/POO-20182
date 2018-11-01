@@ -14,13 +14,13 @@ public class ConsultarLivroCategoria implements Command{
 
         LivroDAO dao = new LivroDAO();
         int id = entrada.nextInt();
+        entrada.nextLine();
         List<Livro> livros = dao.listLivrosCategoria(id);
         for(Livro l : livros) {
             System.out.println(l);
             System.out.println("\n");
         }
         System.out.println("Pressione enter para continuar...");
-        entrada.nextLine();
         entrada.nextLine();
     }
 }

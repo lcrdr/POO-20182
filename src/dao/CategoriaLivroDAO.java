@@ -51,22 +51,6 @@ public class CategoriaLivroDAO {
         }
     }
 
-    /*public void remove(int id) {
-        Connection conn = ConnectionFactory.getConnection();
-        try {
-            String sql = "UPDATE Autor SET deletado = true WHERE codigo = ?";
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, id);
-            ps.executeUpdate();
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } finally {
-            ConnectionFactory.close(conn);
-        }
-    }*/
-
-
     public void update(CategoriaLivro categoriaLivro) {
         Connection conn = ConnectionFactory.getConnection();
         try {

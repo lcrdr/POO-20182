@@ -42,7 +42,6 @@ public class AutorDAO {
                 autores.add(a);
             }
 
-
             conn.close();
             return autores;
 

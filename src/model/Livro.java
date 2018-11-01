@@ -72,8 +72,10 @@ public class Livro {
     public Livro() {
     }
 
-    public void addAutor(Autor autor) {
-        this.autor.add(autor);
+    public void addAutor(Autor autorAdd) {
+        if(!(autor.contains(autorAdd))){
+            this.autor.add(autorAdd);
+        }
     }
 
     public void removeAutor(Autor autor) {
@@ -81,7 +83,9 @@ public class Livro {
     }
 
     public void addCategoria(CategoriaLivro categoriaLivro) {
-        this.categoria.add(categoriaLivro);
+        if(!(categoria.contains(categoriaLivro))){
+            this.categoria.add(categoriaLivro);
+        }
     }
 
     public void removeCategoria(CategoriaLivro categoriaLivro) {
@@ -98,8 +102,7 @@ public class Livro {
 
     @Override
     public String toString() {
-        return "Codigo:" + getCodigo() + "\n" + "Titulo:" + getTitulo() + "\n" + "Categoria(s):" + getCategoria() + "\n" +  "Autor(es):" + getAutor() + "\n" + "Ano:" + getAno() + "\n" + "Disponibilidade:" + (getDisponibilidade() == true ? "Disponível" : "Não disponível");
+        return "Codigo:" + getCodigo() + "\n" + "Titulo:" + getTitulo() + "\n" + "Categoria(s):" + getCategoria() + "\n" +  "Autor(es):" + getAutor() + "\n" + "Ano:" + getAno() + "\n" + "Disponibilidade:" + (getDisponibilidade() ? "Disponível" : "Não disponível");
     }
-
 
 }

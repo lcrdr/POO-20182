@@ -2,6 +2,7 @@ package controller.comando;
 
 import dao.CategoriaUsuarioDAO;
 import dao.UsuarioDAO;
+import dao.proxy.UsuarioDAOProxy;
 import model.Usuario;
 
 import java.util.Scanner;
@@ -9,7 +10,7 @@ import java.util.Scanner;
 public class AlterarUsuario implements Command {
     @Override
     public void execute(Scanner entrada) {
-        UsuarioDAO dao = new UsuarioDAO();
+        UsuarioDAO dao = UsuarioDAOProxy.getInstance();
         System.out.println("Entre com o código do usuário a ser editado:");
         Usuario usuario = dao.getUsuario(entrada.nextInt());
         entrada.nextLine();

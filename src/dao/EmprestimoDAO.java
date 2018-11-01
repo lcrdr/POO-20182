@@ -29,7 +29,7 @@ public class EmprestimoDAO {
         }
     }
 
-    public List<Emprestimo> listEmprestimos() {
+    public List<Emprestimo> listEmprestimo() {
         Connection conn = ConnectionFactory.getConnection();
         try {
             String sql = "SELECT * FROM Emprestimo WHERE deletado=FALSE";

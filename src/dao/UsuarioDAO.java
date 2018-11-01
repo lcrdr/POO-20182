@@ -30,7 +30,7 @@ public class UsuarioDAO {
         }
     }
 
-   public List<Usuario> listUsuarios() {
+   public List<Usuario> listUsuario() {
         Connection conn = ConnectionFactory.getConnection();
         try {
             String sql = "SELECT * FROM Usuario WHERE deletado=FALSE";

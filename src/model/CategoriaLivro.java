@@ -35,6 +35,6 @@ public class CategoriaLivro {
 
     @Override
     public String toString() {
-        return this.nome;
+        return getCodigo() + " " + getNome();
     }
 }

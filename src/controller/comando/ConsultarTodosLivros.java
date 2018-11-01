@@ -1,21 +1,17 @@
 package controller.comando;
 
 import dao.LivroDAO;
+import dao.proxy.LivroDAOProxy;
 import model.Livro;
 
 import java.util.List;
 import java.util.Scanner;
 
-public class ConsultarLivroNome implements Command {
+public class ConsultarTodosLivros implements Command {
     @Override
     public void execute(Scanner entrada) {
-        System.out.println("Digite o nome do livro: ");
-
-        LivroDAO dao = new LivroDAO();
-        entrada.nextLine();
-        String nome = entrada.nextLine();
-
-        List<Livro> livros = dao.listLivros(nome);
+        LivroDAO dao = LivroDAOProxy.getInstance();
+        List<Livro> livros = dao.listLivro();
         for(Livro l : livros) {
             System.out.println(l);
             System.out.println("\n");

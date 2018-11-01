@@ -29,7 +29,7 @@ public class MultaDAO {
         }
     }
 
-    public List<Multa> listMultas() {
+    public List<Multa> listMulta() {
         Connection conn = ConnectionFactory.getConnection();
         try {
             String sql = "SELECT * FROM Multa WHERE deletado=FALSE";
