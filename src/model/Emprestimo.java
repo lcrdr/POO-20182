@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 public class Emprestimo {
     private int codigo;
@@ -49,19 +50,22 @@ public class Emprestimo {
         this.usuario = usuario;
     }
 
-    public Emprestimo(int codigo, LocalDate dataEmprestimo, LocalDate dataDevolucao, Livro livro, Usuario usuario) {
-        this.codigo = codigo;
-        this.dataEmprestimo = dataEmprestimo;
-        this.dataDevolucao = dataDevolucao;
-        this.livro = livro;
-        this.usuario = usuario;
-    }
-
     public Emprestimo() {
     }
+
+    public Emprestimo(Usuario usuario, Livro livro) {
+        this.usuario = usuario;
+        this.livro = livro;
+        this.dataEmprestimo = LocalDate.now();
+        this.dataDevolucao = LocalDate.now().plusDays(usuario.getCategoriaUsuario().getDias());
+    }
+
 
     @Override
     public String toString() {
         return getCodigo() + " Emprestado por: " + getUsuario().getNome() + "\nLivro: " + getLivro().getTitulo() + "\nEmpréstimo em: " + getDataEmprestimo() + "\nDevolução: " + getDataDevolucao();
     }
+
+
+
 }

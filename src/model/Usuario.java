@@ -1,12 +1,14 @@
 package model;
 
+import model.categoriausuario.CategoriaUsuario;
+
 public class Usuario {
     private int codigo;
     private String nome;
     private boolean sexo;
     private String endereco;
-    private CategoriaUsuario categoria;
     private String telefone;
+    private CategoriaUsuario categoriaUsuario;
 
     public int getCodigo() {
         return codigo;
@@ -40,14 +42,6 @@ public class Usuario {
         this.endereco = endereco;
     }
 
-    public CategoriaUsuario getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(CategoriaUsuario categoria) {
-        this.categoria = categoria;
-    }
-
     public String getTelefone() {
         return telefone;
     }
@@ -56,12 +50,19 @@ public class Usuario {
         this.telefone = telefone;
     }
 
-    public Usuario(int codigo, String nome, boolean sexo, String endereco, CategoriaUsuario categoria, String telefone) {
+    public void setCategoriaUsuario(CategoriaUsuario categoriaUsuario){
+        this.categoriaUsuario = categoriaUsuario;
+    }
+
+    public CategoriaUsuario getCategoriaUsuario() {
+        return categoriaUsuario;
+    }
+
+    public Usuario(int codigo, String nome, boolean sexo, String endereco, String telefone) {
         this.codigo = codigo;
         this.nome = nome;
         this.sexo = sexo;
         this.endereco = endereco;
-        this.categoria = categoria;
         this.telefone = telefone;
     }
 
@@ -70,6 +71,7 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return getCodigo() + " " + getNome() + "\n" + getCategoria().getNome() + "\n" + (getSexo() == true ? "Masc" : "Fem") + "\n" + getEndereco() + "\n" + getTelefone();
+        return "Código: " + getCodigo() + "\n" + "Nome: " + getNome() + "\n" + "Sexo: " + (getSexo() == true ? "Masc" : "Fem") + "\n" + "Endereço: " + getEndereco() + "\n" + "Telefone: " + getTelefone() + "\n" + "Categoria: " + categoriaUsuario;
     }
+
 }

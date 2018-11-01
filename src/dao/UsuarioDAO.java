@@ -1,6 +1,7 @@
 package dao;
 
 import model.Usuario;
+import util.ComandosFlyweight;
 import util.ConnectionFactory;
 
 import java.sql.Connection;
@@ -14,13 +15,13 @@ public class UsuarioDAO {
     public void insert(Usuario usuario) {
         Connection conn = ConnectionFactory.getConnection();
         try {
-            String sql = "INSERT INTO Usuario(nome, sexo, endereco, telefone, codigocategoria) VALUES (?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO Usuario(nome, sexo, endereco, telefone, categoriausuario) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, usuario.getNome());
             ps.setBoolean(2, usuario.getSexo());
             ps.setString(3, usuario.getEndereco());
             ps.setString(4, usuario.getTelefone());
-            ps.setInt(5, usuario.getCategoria().getCodigo());
+            ps.setInt(5, usuario.getCategoriaUsuario().getIdCategoria());
             ps.executeUpdate();
 
         } catch (SQLException e) {
@@ -44,8 +45,7 @@ public class UsuarioDAO {
                 u.setSexo(rs.getBoolean(3));
                 u.setEndereco(rs.getString(4));
                 u.setTelefone(rs.getString(5));
-                //CategoriaUsuarioDAO cDAO = new CategoriaUsuarioDAO();
-                //u.setCategoria(cDAO.getCategoria(rs.getInt(6)));
+                u.setCategoriaUsuario(ComandosFlyweight.getInstance().getCategoria(rs.getInt(6)));
                 usuarios.add(u);
             }
 
@@ -79,13 +79,13 @@ public class UsuarioDAO {
     public void update(Usuario usuario) {
         Connection conn = ConnectionFactory.getConnection();
         try {
-            String sql = "UPDATE Usuario SET nome = ?, sexo = ?, endereco = ?, telefone = ?, codigocategoria = ? WHERE codigo = ?";
+            String sql = "UPDATE Usuario SET nome = ?, sexo = ?, endereco = ?, telefone = ?, categoriausuario = ? WHERE codigo = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, usuario.getNome());
             ps.setBoolean(2, usuario.getSexo());
             ps.setString(3, usuario.getEndereco());
             ps.setString(4, usuario.getTelefone());
-            ps.setInt(5, usuario.getCategoria().getCodigo());
+            ps.setInt(5, usuario.getCategoriaUsuario().getIdCategoria());
             ps.setInt(6, usuario.getCodigo());
             ps.executeUpdate();
 
@@ -112,8 +112,7 @@ public class UsuarioDAO {
                 u.setSexo(rs.getBoolean(3));
                 u.setEndereco(rs.getString(4));
                 u.setTelefone(rs.getString(5));
-                //CategoriaUsuarioDAO cDAO = new CategoriaUsuarioDAO();
-                //u.setCategoria(cDAO.getCategoria(rs.getInt(6)));
+                u.setCategoriaUsuario(ComandosFlyweight.getInstance().getCategoria(rs.getInt(6)));
 
                 return u;
             }else{

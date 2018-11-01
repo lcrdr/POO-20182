@@ -1,9 +1,9 @@
 package controller.comando;
 
-import dao.CategoriaUsuarioDAO;
 import dao.UsuarioDAO;
 import dao.proxy.UsuarioDAOProxy;
 import model.Usuario;
+import util.ComandosFlyweight;
 
 import java.util.Scanner;
 
@@ -25,9 +25,15 @@ public class AlterarUsuario implements Command {
         usuario.setEndereco(entrada.nextLine());
         System.out.println("Entre com o telefone do usuário:");
         usuario.setTelefone(entrada.nextLine());
-        System.out.println("Entre com o código da categoria do usuário:");
-        CategoriaUsuarioDAO cdao = new CategoriaUsuarioDAO();
-        usuario.setCategoria(cdao.getCategoria(entrada.nextInt()));
+
+        do {
+
+            System.out.println("Escolha a categoria do usuario:");
+            System.out.println("1 - Professor \n2 - Funcionario \n3 - Aluno \n4 - Comunidade");
+            usuario.setCategoriaUsuario(ComandosFlyweight.getInstance().getCategoria(entrada.nextInt()));
+
+        } while (usuario.getCategoriaUsuario() == null);
+
         entrada.nextLine();
         dao.update(usuario);
     }

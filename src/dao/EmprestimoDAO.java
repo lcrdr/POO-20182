@@ -36,19 +36,20 @@ public class EmprestimoDAO {
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             List<Emprestimo> emprestimos = new ArrayList<>();
+            conn.close();
             while (rs.next()) {
                 Emprestimo e = new Emprestimo();
                 e.setCodigo(rs.getInt(1));
                 e.setDataEmprestimo(rs.getDate(2).toLocalDate());
                 e.setDataDevolucao(rs.getDate(3).toLocalDate());
-                /*LivroDAO lDAO = new LivroDAO();
-                e.setLivro(lDAO.getLivro(rs.getInt(4)));*/
-                /*UsuarioDAO uDAO = new UsuarioDAO();
-                e.setUsuario(uDAO.getUsuario(rs.getInt(5)));*/
+                LivroDAO lDAO = new LivroDAO();
+                e.setLivro(lDAO.getLivro(rs.getInt(4)));
+                UsuarioDAO uDAO = new UsuarioDAO();
+                e.setUsuario(uDAO.getUsuario(rs.getInt(5)));
                 emprestimos.add(e);
             }
 
-            conn.close();
+
             return emprestimos;
 
         } catch (SQLException e) {

@@ -7,6 +7,8 @@ import dao.proxy.EmprestimoDAOProxy;
 import dao.proxy.LivroDAOProxy;
 import dao.proxy.UsuarioDAOProxy;
 import model.Emprestimo;
+import model.Livro;
+import model.Usuario;
 
 import java.util.Scanner;
 
@@ -18,18 +20,18 @@ public class CadastrarEmprestimo implements Command {
         LivroDAO ldao = LivroDAOProxy.getInstance();
         EmprestimoDAO dao = EmprestimoDAOProxy.getInstance();
 
-        Emprestimo emprestimo = new Emprestimo();
-
         System.out.println("Entre com o id do usuário:");
-        emprestimo.setUsuario(udao.getUsuario(entrada.nextInt()));
+        Usuario usuario = udao.getUsuario(entrada.nextInt());
         entrada.nextLine();
 
-        System.out.println("Entre com o id do usuário:");
-        emprestimo.setLivro(ldao.getLivro(entrada.nextInt()));
+        System.out.println("Entre com o id do livro:");
+        Livro livro = ldao.getLivro(entrada.nextInt());
         entrada.nextLine();
 
-        /*TODO alterar esquema de como funciona CategoriaUsuario para herança e assim usar Strategy (ou algum outro padrão)*/
+        Emprestimo emprestimo = new Emprestimo(usuario, livro);
 
         dao.insert(emprestimo);
+
+        System.out.println("Emprestimo registrado com sucesso.");
     }
 }
