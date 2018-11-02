@@ -16,7 +16,7 @@ public class MultaDAO {
         try {
             String sql = "INSERT INTO Multa(codigousuario, descricao, valor) VALUES (?, ?, ?)";
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, multa.getUsuario().getCodigo());
+         //   ps.setInt(1, multa.getUsuario().getCodigo());
             ps.setString(2, multa.getDescricao());
             ps.setDouble(3, multa.getValor());
 

@@ -2,9 +2,9 @@ package model;
 
 public class Multa {
     private int codigo;
-    private Usuario usuario;
     private String descricao;
     private double valor;
+    private Emprestimo emprestimo;
 
     public int getCodigo() {
         return codigo;
@@ -12,14 +12,6 @@ public class Multa {
 
     public void setCodigo(int codigo) {
         this.codigo = codigo;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
     }
 
     public String getDescricao() {
@@ -38,13 +30,18 @@ public class Multa {
         this.valor = valor;
     }
 
-    public Multa(int codigo, Usuario usuario, String descricao, double valor) {
+    public Multa(int codigo, Emprestimo emprestimo, String descricao, double valor) {
         this.codigo = codigo;
-        this.usuario = usuario;
+        this.emprestimo = emprestimo;
         this.descricao = descricao;
         this.valor = valor;
     }
 
     public Multa() {
     }
+
+    public double calculaValor(){
+        return 0;
+    }
+
 }
