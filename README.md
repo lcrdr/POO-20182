@@ -12,6 +12,9 @@ Adicionais:<b>
 - Unificar interface;
 - Reservar livro na data de devolução (criar fila de reserva por data de hora);
 - Implementar sistema de devolução de emprestimo;
+- Usuário não pode emprestar se estiver devendo (?);
+- Só excluir usuário se todos os empréstimos estiverem devolvidos;
+- Só excluir livro se todos os empréstimos dele estiverem devolvidos (?).
   
 </b>
 
