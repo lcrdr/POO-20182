@@ -6,15 +6,14 @@ Sistema de Controle de Biblioteca
 
 Requisitos Funcionais
 
-Adicionais:
-<b>
+Adicionais:<b>
 - Sistema de Login;
 - Não cadastrar livro sem autor/categoria;
 - Unificar interface;
 - Reservar livro na data de devolução (criar fila de reserva por data de hora);
 - Implementar sistema de devolução de emprestimo;
+  
 </b>
-
 
 <b>DONE</b> - RF01 – o sistema deve permitir ao bibliotecário cadastrar livros contendo código, autor,
 categoria, ano, prioridade e disponibilidade.
