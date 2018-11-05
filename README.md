@@ -8,6 +8,7 @@ Requisitos Funcionais
 
 Adicionais:<b>
 - Sistema de Login;
+- Adicionar login e senha na classe/banco Usuario;
 - Não cadastrar livro sem autor/categoria; - OK
 - Unificar interface;
 - Reservar livro na data de devolução (criar fila de reserva por data de hora);
