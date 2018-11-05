@@ -30,10 +30,20 @@ public class CadastrarUsuario implements Command {
         do {
 
             System.out.println("Escolha a categoria do usuario:");
-            System.out.println("1 - Professor \n2 - Funcionario \n3 - Aluno \n4 - Comunidade");
+            System.out.println("1 - Professor \n2 - Funcionario \n3 - Aluno \n4 - Comunidade \n5 - Bibliotecario");
             usuario.setCategoriaUsuario(ComandosFlyweight.getInstance().getCategoria(entrada.nextInt()));
 
         } while (usuario.getCategoriaUsuario() == null);
+
+        System.out.println("Digite o login:");
+        usuario.setLogin(entrada.nextLine());
+
+
+        //Verificar se o login existe
+
+
+        System.out.println("Digite a senha:");
+        usuario.setSenha(entrada.nextLine());
 
         entrada.nextLine();
         dao.insert(usuario);

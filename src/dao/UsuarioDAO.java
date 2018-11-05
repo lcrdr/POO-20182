@@ -15,13 +15,15 @@ public class UsuarioDAO {
     public void insert(Usuario usuario) {
         Connection conn = ConnectionFactory.getConnection();
         try {
-            String sql = "INSERT INTO Usuario(nome, sexo, endereco, telefone, categoriausuario) VALUES (?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO Usuario(nome, sexo, endereco, telefone, categoriausuario, login, senha) VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, usuario.getNome());
             ps.setBoolean(2, usuario.getSexo());
             ps.setString(3, usuario.getEndereco());
             ps.setString(4, usuario.getTelefone());
             ps.setInt(5, usuario.getCategoriaUsuario().getIdCategoria());
+            ps.setString(6,usuario.getLogin());
+            ps.setString(7, usuario.getSenha());
             ps.executeUpdate();
 
         } catch (SQLException e) {
@@ -45,6 +47,8 @@ public class UsuarioDAO {
                 u.setSexo(rs.getBoolean(3));
                 u.setEndereco(rs.getString(4));
                 u.setTelefone(rs.getString(5));
+                u.setLogin(rs.getString(6));
+                u.setSenha(rs.getString(7));
                 u.setCategoriaUsuario(ComandosFlyweight.getInstance().getCategoria(rs.getInt(6)));
                 usuarios.add(u);
             }
@@ -79,14 +83,15 @@ public class UsuarioDAO {
     public void update(Usuario usuario) {
         Connection conn = ConnectionFactory.getConnection();
         try {
-            String sql = "UPDATE Usuario SET nome = ?, sexo = ?, endereco = ?, telefone = ?, categoriausuario = ? WHERE codigo = ?";
+            String sql = "UPDATE Usuario SET nome = ?, sexo = ?, endereco = ?, telefone = ?, categoriausuario = ?, senha = ? WHERE codigo = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, usuario.getNome());
             ps.setBoolean(2, usuario.getSexo());
             ps.setString(3, usuario.getEndereco());
             ps.setString(4, usuario.getTelefone());
             ps.setInt(5, usuario.getCategoriaUsuario().getIdCategoria());
-            ps.setInt(6, usuario.getCodigo());
+            ps.setString(6, usuario.getSenha());
+            ps.setInt(7, usuario.getCodigo());
             ps.executeUpdate();
 
         } catch (SQLException e) {
@@ -113,6 +118,8 @@ public class UsuarioDAO {
                 u.setEndereco(rs.getString(4));
                 u.setTelefone(rs.getString(5));
                 u.setCategoriaUsuario(ComandosFlyweight.getInstance().getCategoria(rs.getInt(6)));
+                u.setLogin(rs.getString(7));
+                u.setSenha(rs.getString(8));
 
                 return u;
             }else{

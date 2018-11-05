@@ -10,6 +10,25 @@ public class Usuario {
     private String telefone;
     private CategoriaUsuario categoriaUsuario;
 
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    private String login;
+    private String senha;
+
     public int getCodigo() {
         return codigo;
     }
@@ -58,12 +77,14 @@ public class Usuario {
         return categoriaUsuario;
     }
 
-    public Usuario(int codigo, String nome, boolean sexo, String endereco, String telefone) {
+    public Usuario(int codigo, String nome, boolean sexo, String endereco, String telefone, String login, String senha) {
         this.codigo = codigo;
         this.nome = nome;
         this.sexo = sexo;
         this.endereco = endereco;
         this.telefone = telefone;
+        this.login = login;
+        this.senha = senha;
     }
 
     public Usuario() {
@@ -71,7 +92,9 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Código: " + getCodigo() + "\n" + "Nome: " + getNome() + "\n" + "Sexo: " + (getSexo() == true ? "Masc" : "Fem") + "\n" + "Endereço: " + getEndereco() + "\n" + "Telefone: " + getTelefone() + "\n" + "Categoria: " + categoriaUsuario;
+        return "Código: " + getCodigo() + "\n" + "Nome: " + getNome() + "\n" + "Sexo: " + (getSexo() == true ? "Masc" : "Fem") + "\n" +
+                "Endereço: " + getEndereco() + "\n" + "Telefone: " + getTelefone() + "\n" +
+                "Categoria: " + categoriaUsuario + "\n" + "Login: " + getLogin() + "\n" + "Senha: " + getSenha();
     }
 
 }

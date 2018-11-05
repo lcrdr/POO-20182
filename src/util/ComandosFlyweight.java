@@ -14,6 +14,7 @@ public class ComandosFlyweight {
         categorias.put(2, new Funcionario());
         categorias.put(3, new Aluno());
         categorias.put(4, new Comunidade());
+        categorias.put(5, new Bibliotecario());
     }
 
     public CategoriaUsuario getCategoria(Integer codigo){
