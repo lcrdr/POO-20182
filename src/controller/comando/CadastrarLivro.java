@@ -34,13 +34,17 @@ public class CadastrarLivro implements Command {
         do {
             System.out.println("Digite o id da categoria do livro ou 0 para sair:");
             List<CategoriaLivro> categorias = cdao.listCategoria();
-            for(CategoriaLivro c : categorias){
+            for (CategoriaLivro c : categorias) {
                 System.out.println(c);
             }
             id = entrada.nextInt();
             entrada.nextLine();
-            if(id != 0)
+            if (id != 0){
                 livro.addCategoria(cdao.getCategoria(id));
+            }else if (livro.getCategoria().isEmpty()) {
+                System.out.println("Você deve cadastrar ao menos uma categoria.");
+                id = 1;
+            }
 
         }while (id != 0);
 
@@ -54,9 +58,12 @@ public class CadastrarLivro implements Command {
             }
             id = entrada.nextInt();
             entrada.nextLine();
-            if(id != 0)
+            if(id != 0) {
                 livro.addAutor(adao.getAutor(id));
-
+            }else if (livro.getAutor().isEmpty()) {
+                System.out.println("Você deve cadastrar ao menos um autor.");
+                id = 1;
+            }
         }while (id != 0);
 
         dao.insert(livro);
