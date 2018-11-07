@@ -170,7 +170,7 @@ public class UsuarioDAO {
         try {
             String sql = "SELECT * FROM Usuario WHERE login = ? AND deletado=FALSE";
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, "'" + login + "'");
+            ps.setString(1, login);
             ResultSet rs = ps.executeQuery();
             conn.close();
 

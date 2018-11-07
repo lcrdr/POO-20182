@@ -32,6 +32,7 @@ public class CadastrarUsuario implements Command {
             System.out.println("Escolha a categoria do usuario:");
             System.out.println("1 - Professor \n2 - Funcionario \n3 - Aluno \n4 - Comunidade \n5 - Bibliotecario");
             usuario.setCategoriaUsuario(ComandosFlyweight.getInstance().getCategoria(entrada.nextInt()));
+            entrada.nextLine();
 
         } while (usuario.getCategoriaUsuario() == null);
 
@@ -55,12 +56,10 @@ public class CadastrarUsuario implements Command {
             System.out.println("Confirme sua senha:");
             senha = entrada.nextLine();
 
-            if (senha != usuario.getSenha())
+            if (!(senha.equals(usuario.getSenha())))
                 System.out.println("As senhas não conferem, digite novamente.");
-        } while (senha != usuario.getSenha());
-        entrada.nextLine();
+        } while (!(senha.equals(usuario.getSenha())));
         dao.insert(usuario);
-
         System.out.println("Usuario cadastrado com sucesso.");
     }
 }
