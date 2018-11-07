@@ -7,10 +7,10 @@ Sistema de Controle de Biblioteca
 Requisitos Funcionais
 
 Adicionais:<b>
-- Sistema de Login;
-- Adicionar login e senha na classe/banco Usuario;
+- Sistema de Login; OK
+- Adicionar login e senha na classe/banco Usuario; OK
 - Não cadastrar livro sem autor/categoria; - OK
-- Unificar interface;
+- Unificar interface; OK
 - Reservar livro na data de devolução (criar fila de reserva por data de hora);
 - Implementar sistema de devolução de emprestimo;
 - Usuário não pode emprestar se estiver devendo (?);
