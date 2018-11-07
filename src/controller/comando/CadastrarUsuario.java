@@ -35,16 +35,29 @@ public class CadastrarUsuario implements Command {
 
         } while (usuario.getCategoriaUsuario() == null);
 
-        System.out.println("Digite o login:");
-        usuario.setLogin(entrada.nextLine());
 
 
-        //Verificar se o login existe
+        String login;
 
+        do {
+            System.out.println("Digite o login:");
+            login = entrada.nextLine();
+            if(dao.verificaLogin(login))
+                System.out.println("Este usuario já esta em uso, digite outro.");
+        } while (dao.verificaLogin(login));
 
-        System.out.println("Digite a senha:");
-        usuario.setSenha(entrada.nextLine());
+        usuario.setLogin(login);
+        String senha;
+        do {
+            System.out.println("Digite a senha:");
+            usuario.setSenha(entrada.nextLine());
 
+            System.out.println("Confirme sua senha:");
+            senha = entrada.nextLine();
+
+            if (senha != usuario.getSenha())
+                System.out.println("As senhas não conferem, digite novamente.");
+        } while (senha != usuario.getSenha());
         entrada.nextLine();
         dao.insert(usuario);
 

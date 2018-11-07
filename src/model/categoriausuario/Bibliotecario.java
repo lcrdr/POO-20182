@@ -21,6 +21,6 @@ public class Bibliotecario implements CategoriaUsuario {
 
     @Override
     public int getIdCategoria() {
-        return 0;
+        return id;
     }
 }

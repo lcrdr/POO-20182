@@ -132,4 +132,81 @@ public class UsuarioDAO {
             ConnectionFactory.close(conn);
         }
     }
+
+    public Usuario getUsuario(String login) {
+        Connection conn = ConnectionFactory.getConnection();
+        try {
+            String sql = "SELECT * FROM Usuario WHERE login = ? AND deletado=FALSE";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, login);
+            ResultSet rs = ps.executeQuery();
+            conn.close();
+
+            if(rs.next()){
+                Usuario u = new Usuario();
+                u.setCodigo(rs.getInt(1));
+                u.setNome(rs.getString(2));
+                u.setSexo(rs.getBoolean(3));
+                u.setEndereco(rs.getString(4));
+                u.setTelefone(rs.getString(5));
+                u.setCategoriaUsuario(ComandosFlyweight.getInstance().getCategoria(rs.getInt(6)));
+                u.setLogin(rs.getString(7));
+                u.setSenha(rs.getString(8));
+
+                return u;
+            }else{
+                return null;
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            ConnectionFactory.close(conn);
+        }
+    }
+
+    public boolean verificaLogin(String login) {
+        Connection conn = ConnectionFactory.getConnection();
+        try {
+            String sql = "SELECT * FROM Usuario WHERE login = ? AND deletado=FALSE";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, "'" + login + "'");
+            ResultSet rs = ps.executeQuery();
+            conn.close();
+
+            if(rs.next()){
+                return true;
+            }else{
+                return false;
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            ConnectionFactory.close(conn);
+        }
+    }
+
+    public boolean verificaLogin(String login, String senha) {
+        Connection conn = ConnectionFactory.getConnection();
+        try {
+            String sql = "SELECT * FROM Usuario WHERE login = ? AND senha = ? AND deletado=FALSE";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, login);
+            ps.setString(2,   senha);
+            ResultSet rs = ps.executeQuery();
+            conn.close();
+
+            if(rs.next()){
+                return true;
+            }else{
+                return false;
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            ConnectionFactory.close(conn);
+        }
+    }
 }
