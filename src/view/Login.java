@@ -13,6 +13,9 @@ public class Login {
 
     public static void main(String[] args) {
         UsuarioDAO uDAO = new UsuarioDAO();
+
+        uDAO.insertAdmin();
+
         Scanner entrada = new Scanner(System.in);
         Usuario user = new Usuario();
         boolean logado;

@@ -209,4 +209,48 @@ public class UsuarioDAO {
             ConnectionFactory.close(conn);
         }
     }
+
+    public int count(){
+        try {
+            Connection conn = ConnectionFactory.getConnection();
+            String sql = "SELECT COUNT(*) FROM Usuario";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            conn.close();
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                return count;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public void insertAdmin() {
+
+        int count = count();
+
+        if (count == 0) {
+            Connection conn = ConnectionFactory.getConnection();
+            try {
+                String sql = "INSERT INTO Usuario(nome, sexo, endereco, telefone, categoriausuario, login, senha) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                PreparedStatement ps = conn.prepareStatement(sql);
+                ps.setString(1, "Admin");
+                ps.setBoolean(2, true);
+                ps.setString(3, "N/A");
+                ps.setString(4, "N/A");
+                ps.setInt(5, 5);
+                ps.setString(6, "admin");
+                ps.setString(7, "admin");
+                ps.executeUpdate();
+                System.out.println("- Banco de dados sem usuarios. - \nCriando usuario administrador...");
+                System.out.println("Usuario criado com sucesso. \nLogin: admin - Senha: admin\n");
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            } finally {
+                ConnectionFactory.close(conn);
+            }
+        }
+    }
 }
