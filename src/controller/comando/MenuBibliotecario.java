@@ -28,6 +28,8 @@ public class MenuBibliotecario implements Command{
 
         //comandos.put(13, new CadastrarMulta());
 
+        comandos.put(14, new GerarRelatorio());
+
         do {
 
             System.out.println("0 - Sair\n");
@@ -49,6 +51,8 @@ public class MenuBibliotecario implements Command{
             System.out.println("12 - Consultar Empréstimo");
             System.out.println("\n<-- Gerenciar Multas -->");
             System.out.println("13 - Cadastrar Multa");
+            System.out.println("\n<-- Relatórios -->");
+            System.out.println("14 - Gerar relatórios");
             System.out.println("\nEscolha uma opção:");
 
             opcao = entrada.nextInt();

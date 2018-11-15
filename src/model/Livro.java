@@ -32,6 +32,19 @@ public class Livro {
         return prioridade;
     }
 
+    public String getPrioridadeString() {
+        switch (getPrioridade()) {
+            case 1:
+                return "Baixa";
+            case 2:
+                return "Média";
+            case 3:
+                return "Alta";
+            default:
+                return "";
+        }
+    }
+
     public void setPrioridade(int prioridade) {
         this.prioridade = prioridade;
     }
@@ -50,6 +63,10 @@ public class Livro {
 
     public boolean getDisponibilidade() {
         return disponibilidade;
+    }
+
+    public String getDisponibilidadeString() {
+        return getDisponibilidade() ? "Disponível" : "Não disponível";
     }
 
     public void setDisponibilidade(boolean disponibilidade) {
@@ -102,7 +119,7 @@ public class Livro {
 
     @Override
     public String toString() {
-        return "Codigo:" + getCodigo() + "\n" + "Titulo:" + getTitulo() + "\n" + "Categoria(s):" + getCategoria() + "\n" +  "Autor(es):" + getAutor() + "\n" + "Ano:" + getAno() + "\n" + "Disponibilidade:" + (getDisponibilidade() ? "Disponível" : "Não disponível");
+        return "Codigo:" + getCodigo() + "\n" + "Titulo:" + getTitulo() + "\n" + "Categoria(s):" + getCategoria() + "\n" +  "Autor(es):" + getAutor() + "\n" + "Ano:" + getAno() + "\n" + getDisponibilidadeString();
     }
 
 }

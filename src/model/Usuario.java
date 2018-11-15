@@ -49,6 +49,10 @@ public class Usuario {
         return sexo;
     }
 
+    public String getSexoString() {
+        return getSexo() == true ? "Masc" : "Fem";
+    }
+
     public void setSexo(boolean sexo) {
         this.sexo = sexo;
     }
@@ -92,7 +96,7 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Código: " + getCodigo() + "\n" + "Nome: " + getNome() + "\n" + "Sexo: " + (getSexo() == true ? "Masc" : "Fem") + "\n" +
+        return "Código: " + getCodigo() + "\n" + "Nome: " + getNome() + "\n" + "Sexo: " + getSexoString() + "\n" +
                 "Endereço: " + getEndereco() + "\n" + "Telefone: " + getTelefone() + "\n" +
                 "Categoria: " + categoriaUsuario + "\n" + "Login: " + getLogin() + "\n" + "Senha: " + getSenha();
     }
