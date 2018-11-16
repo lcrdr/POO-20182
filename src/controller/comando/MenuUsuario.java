@@ -15,13 +15,13 @@ public class MenuUsuario implements Command {
         comandos.put(0, new Sair());
 
         do {
-
             System.out.println("<--- Biblioteca --->");
             System.out.println("0 - Sair");
             System.out.println("1 - Consultar Livro");
             System.out.println("2 - Reservar Livro");
             System.out.println("Escolha uma opção:");
             opcao = entrada.nextInt();
+            entrada.nextLine();
             comandos.get(opcao).execute(entrada);
 
         } while (opcao != 0);

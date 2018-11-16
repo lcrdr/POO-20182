@@ -11,5 +11,6 @@ public class RemoverUsuario implements Command {
         UsuarioDAO dao = UsuarioDAOProxy.getInstance();
         System.out.println("Entre com o código do usuário a ser removido:");
         dao.remove(entrada.nextInt());
+        entrada.nextLine();
     }
 }

@@ -12,5 +12,6 @@ public class RemoverLivro implements Command {
         LivroDAO dao = LivroDAOProxy.getInstance();
         System.out.println("Entre com o código do livro a ser removido:");
         dao.remove(entrada.nextInt());
+        entrada.nextLine();
     }
 }

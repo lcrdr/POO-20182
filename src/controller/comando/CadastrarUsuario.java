@@ -18,10 +18,12 @@ public class CadastrarUsuario implements Command {
         System.out.println("Entre com o nome do usuário:");
         usuario.setNome(entrada.nextLine());
         System.out.println("Entre com o sexo do usuário (M/F):");
+
         if (entrada.nextLine().toUpperCase().equals("M"))
             usuario.setSexo(true);
         else
             usuario.setSexo(false);
+
         System.out.println("Entre com o endereço do usuário:");
         usuario.setEndereco(entrada.nextLine());
         System.out.println("Entre com o telefone do usuário:");
@@ -36,8 +38,6 @@ public class CadastrarUsuario implements Command {
 
         } while (usuario.getCategoriaUsuario() == null);
 
-
-
         String login;
 
         do {
@@ -49,6 +49,7 @@ public class CadastrarUsuario implements Command {
 
         usuario.setLogin(login);
         String senha;
+
         do {
             System.out.println("Digite a senha:");
             usuario.setSenha(entrada.nextLine());
@@ -59,6 +60,7 @@ public class CadastrarUsuario implements Command {
             if (!(senha.equals(usuario.getSenha())))
                 System.out.println("As senhas não conferem, digite novamente.");
         } while (!(senha.equals(usuario.getSenha())));
+
         dao.insert(usuario);
         System.out.println("Usuario cadastrado com sucesso.");
     }

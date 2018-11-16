@@ -66,7 +66,7 @@ usuários.
 <b>DONE</b> - RF12 – o sistema deve ter uma interface para o usuário em linha de comando.
 
 
-RF13 – o sistema deve permitir ao bibliotecário gerar relatórios das consultas em 3 formatos
+<b>DONE</b> - RF13 – o sistema deve permitir ao bibliotecário gerar relatórios das consultas em 3 formatos
 possíveis: CSV, XML, JSON.
 
 
