@@ -89,7 +89,7 @@ public class GeradorRelatorioXML implements GeradorRelatorio {
         List<Emprestimo> emprestimos = dao.listEmprestimo();
 
         try {
-            PrintWriter pw = new PrintWriter(new File("relatorioUsuarios.xml"));
+            PrintWriter pw = new PrintWriter(new File("relatorioEmprestimos.xml"));
             StringBuilder sb = new StringBuilder();
 
             sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Empréstimos>");
