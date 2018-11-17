@@ -1,5 +1,6 @@
 package dao;
 
+import dao.proxy.MultaDAOProxy;
 import model.Usuario;
 import util.ComandosFlyweight;
 import util.ConnectionFactory;
@@ -50,6 +51,9 @@ public class UsuarioDAO {
                 u.setLogin(rs.getString(6));
                 u.setSenha(rs.getString(7));
                 u.setCategoriaUsuario(ComandosFlyweight.getInstance().getCategoria(rs.getInt(6)));
+                MultaDAO mdao = MultaDAOProxy.getInstance();
+                u.setMultas(mdao.listMulta(u));
+
                 usuarios.add(u);
             }
 
@@ -120,6 +124,8 @@ public class UsuarioDAO {
                 u.setCategoriaUsuario(ComandosFlyweight.getInstance().getCategoria(rs.getInt(6)));
                 u.setLogin(rs.getString(7));
                 u.setSenha(rs.getString(8));
+                MultaDAO mdao = MultaDAOProxy.getInstance();
+                u.setMultas(mdao.listMulta(u));
 
                 return u;
             }else{
@@ -152,6 +158,8 @@ public class UsuarioDAO {
                 u.setCategoriaUsuario(ComandosFlyweight.getInstance().getCategoria(rs.getInt(6)));
                 u.setLogin(rs.getString(7));
                 u.setSenha(rs.getString(8));
+                MultaDAO mdao = MultaDAOProxy.getInstance();
+                u.setMultas(mdao.listMulta(u));
 
                 return u;
             }else{

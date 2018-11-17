@@ -27,7 +27,7 @@ public class Login {
             user.setSenha(entrada.nextLine());
             logado = uDAO.verificaLogin(user.getLogin(), user.getSenha());
             if (!logado)
-                System.out.println("Usuario ou senha invalidos.");
+                System.out.println("Usuario ou senha inválidos.");
         }while (!logado);
 
             user = uDAO.getUsuario(user.getLogin());

@@ -2,6 +2,8 @@ package model;
 
 import model.categoriausuario.CategoriaUsuario;
 
+import java.util.List;
+
 public class Usuario {
     private int codigo;
     private String nome;
@@ -9,6 +11,9 @@ public class Usuario {
     private String endereco;
     private String telefone;
     private CategoriaUsuario categoriaUsuario;
+    private List<Multa> multas;
+    private String login;
+    private String senha;
 
     public String getLogin() {
         return login;
@@ -25,9 +30,6 @@ public class Usuario {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-
-    private String login;
-    private String senha;
 
     public int getCodigo() {
         return codigo;
@@ -79,6 +81,22 @@ public class Usuario {
 
     public CategoriaUsuario getCategoriaUsuario() {
         return categoriaUsuario;
+    }
+
+    public List<Multa> getMultas() {
+        return multas;
+    }
+
+    public void addMulta(Multa multa){
+        multas.add(multa);
+    }
+
+    public void removeMulta(Multa multa){
+        multas.remove(multa);
+    }
+
+    public void setMultas(List<Multa> multas) {
+        this.multas = multas;
     }
 
     public Usuario(int codigo, String nome, boolean sexo, String endereco, String telefone, String login, String senha) {

@@ -1,6 +1,7 @@
 package dao;
 
 import model.Emprestimo;
+import model.Usuario;
 import util.ConnectionFactory;
 
 import java.sql.*;
@@ -49,6 +50,37 @@ public class EmprestimoDAO {
                 emprestimos.add(e);
             }
 
+
+            return emprestimos;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            ConnectionFactory.close(conn);
+        }
+    }
+
+    public List<Emprestimo> listEmprestimo(Usuario usuario) {
+        Connection conn = ConnectionFactory.getConnection();
+        try {
+            String sql = "SELECT * FROM Emprestimo WHERE codigousuario = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1,usuario.getCodigo());
+
+            ResultSet rs = ps.executeQuery();
+            List<Emprestimo> emprestimos = new ArrayList<>();
+            conn.close();
+
+            while (rs.next()) {
+                Emprestimo e = new Emprestimo();
+                e.setCodigo(rs.getInt(1));
+                e.setDataEmprestimo(rs.getDate(2).toLocalDate());
+                e.setDataDevolucao(rs.getDate(3).toLocalDate());
+                LivroDAO lDAO = new LivroDAO();
+                e.setLivro(lDAO.getLivro(rs.getInt(4)));
+                e.setUsuario(usuario);
+                emprestimos.add(e);
+            }
 
             return emprestimos;
 

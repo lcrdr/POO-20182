@@ -30,18 +30,34 @@ public class Multa {
         this.valor = valor;
     }
 
-    public Multa(int codigo, Emprestimo emprestimo, String descricao, double valor) {
-        this.codigo = codigo;
+    public Emprestimo getEmprestimo() {
+        return emprestimo;
+    }
+
+    public void setEmprestimo(Emprestimo emprestimo) {
+        this.emprestimo = emprestimo;
+    }
+
+    public Multa(Emprestimo emprestimo, String descricao, int atraso) {
         this.emprestimo = emprestimo;
         this.descricao = descricao;
-        this.valor = valor;
+        calculaValor(atraso);
     }
 
     public Multa() {
     }
 
-    public double calculaValor(){
-        return 0;
+    public void calculaValor(int atraso){
+        setValor((emprestimo.getLivro().getPrioridade() * (double)(Math.abs(atraso))) + (emprestimo.getUsuario().getCategoriaUsuario().getMulta() * (double)(Math.abs(atraso))));
     }
 
+    @Override
+    public String toString() {
+        return getCodigo() + "\n" + getDescricao() + "\n" + getValor();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return ((Multa)obj).getCodigo() == this.getCodigo();
+    }
 }

@@ -24,14 +24,21 @@ public class CadastrarEmprestimo implements Command {
         Usuario usuario = udao.getUsuario(entrada.nextInt());
         entrada.nextLine();
 
-        System.out.println("Entre com o id do livro:");
-        Livro livro = ldao.getLivro(entrada.nextInt());
+        if(usuario.getMultas().isEmpty()){
+            System.out.println("Entre com o id do livro:");
+            Livro livro = ldao.getLivro(entrada.nextInt());
+            entrada.nextLine();
+
+            Emprestimo emprestimo = new Emprestimo(usuario, livro);
+
+            dao.insert(emprestimo);
+
+            System.out.println("Emprestimo registrado com sucesso.");
+        }else{
+            System.out.println("O usuário não pode realizar empréstimos pois tem multas a pagar.");
+        }
+
+        System.out.println("Pressione enter para continuar...");
         entrada.nextLine();
-
-        Emprestimo emprestimo = new Emprestimo(usuario, livro);
-
-        dao.insert(emprestimo);
-
-        System.out.println("Emprestimo registrado com sucesso.");
     }
 }

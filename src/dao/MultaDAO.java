@@ -1,6 +1,8 @@
 package dao;
 
+import dao.proxy.EmprestimoDAOProxy;
 import model.Multa;
+import model.Usuario;
 import util.ConnectionFactory;
 
 import java.sql.Connection;
@@ -14,9 +16,10 @@ public class MultaDAO {
     public void insert(Multa multa) {
         Connection conn = ConnectionFactory.getConnection();
         try {
-            String sql = "INSERT INTO Multa(codigousuario, descricao, valor) VALUES (?, ?, ?)";
+            String sql = "INSERT INTO Multa(codigoemprestimo, descricao, valor) VALUES (?, ?, ?)";
             PreparedStatement ps = conn.prepareStatement(sql);
-         //   ps.setInt(1, multa.getUsuario().getCodigo());
+
+            ps.setInt(1, multa.getEmprestimo().getCodigo());
             ps.setString(2, multa.getDescricao());
             ps.setDouble(3, multa.getValor());
 
@@ -39,8 +42,35 @@ public class MultaDAO {
             while (rs.next()) {
                 Multa m = new Multa();
                 m.setCodigo(rs.getInt(1));
-                /*UsuarioDAO uDAO = new UsuarioDAO();
-                m.setUsuario(uDAO.getUsuario(rs.getInt(2)));*/
+                EmprestimoDAO edao = EmprestimoDAOProxy.getInstance();
+                m.setEmprestimo(edao.getEmprestimo(rs.getInt(2)));
+                m.setDescricao(rs.getString(3));
+                m.setValor(rs.getDouble(4));
+                multas.add(m);
+            }
+
+            conn.close();
+            return multas;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            ConnectionFactory.close(conn);
+        }
+    }
+
+    public List<Multa> listMulta(Usuario usuario) {
+        Connection conn = ConnectionFactory.getConnection();
+        try {
+            String sql = "SELECT M.* FROM (Multa M JOIN Emprestimo E ON M.codigoemprestimo = E.codigo) JOIN Usuario U ON E.codigousuario = U.codigo WHERE U.deletado=FALSE AND E.deletado=FALSE AND M.deletado=FALSE";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            List<Multa> multas = new ArrayList<>();
+            while (rs.next()) {
+                Multa m = new Multa();
+                m.setCodigo(rs.getInt(1));
+                EmprestimoDAO edao = EmprestimoDAOProxy.getInstance();
+                m.setEmprestimo(edao.getEmprestimo(rs.getInt(2)));
                 m.setDescricao(rs.getString(3));
                 m.setValor(rs.getDouble(4));
                 multas.add(m);
@@ -100,8 +130,8 @@ public class MultaDAO {
             if(rs.next()) {
                 Multa m = new Multa();
                 m.setCodigo(rs.getInt(1));
-                /*UsuarioDAO uDAO = new UsuarioDAO();
-                m.setUsuario(uDAO.getUsuario(rs.getInt(2)));*/
+                EmprestimoDAO edao = EmprestimoDAOProxy.getInstance();
+                m.setEmprestimo(edao.getEmprestimo(rs.getInt(2)));
                 m.setDescricao(rs.getString(3));
                 m.setValor(rs.getDouble(4));
 
