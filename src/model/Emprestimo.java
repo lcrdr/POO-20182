@@ -1,6 +1,8 @@
 package model;
 
+import dao.EmprestimoDAO;
 import dao.MultaDAO;
+import dao.proxy.EmprestimoDAOProxy;
 import dao.proxy.MultaDAOProxy;
 
 import java.time.LocalDate;
@@ -76,8 +78,10 @@ public class Emprestimo {
 
         getUsuario().addMulta(multa);
         MultaDAO dao = MultaDAOProxy.getInstance();
-
         dao.insert(multa);
+
+        EmprestimoDAO emprestimoDAO= EmprestimoDAOProxy.getInstance();
+        emprestimoDAO.update(this);
     }
 
     public Emprestimo() {

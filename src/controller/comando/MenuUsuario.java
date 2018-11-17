@@ -11,7 +11,7 @@ public class MenuUsuario implements Command {
         Hashtable<Integer, Command> comandos =
                 new Hashtable<Integer, Command>();
         comandos.put(1, new ConsultarLivros());
-        //comandos.put(2, new ReservarLivro());
+        comandos.put(2, new ReservarLivro());
         comandos.put(0, new Sair());
 
         do {
