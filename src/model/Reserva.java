@@ -3,10 +3,10 @@ package model;
 import java.time.LocalDate;
 
 public class Reserva {
-    private int id;
-    private Livro livro;
-    private Usuario usuario;
-    private LocalDate dataReserva;
+    private int id = 0;
+    private Livro livro = new Livro();
+    private Usuario usuario = new Usuario();
+    private LocalDate dataReserva = LocalDate.now();
 
     public int getId() {
         return id;

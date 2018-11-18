@@ -12,8 +12,12 @@ public class ConsultarEmprestimos implements Command {
     public void execute(Scanner entrada) {
         EmprestimoDAO dao = EmprestimoDAOProxy.getInstance();
         List<Emprestimo> emprestimos = dao.listEmprestimo();
-        for(Emprestimo e : emprestimos) {
-            System.out.println(e);
+        if (!emprestimos.isEmpty()) {
+            for (Emprestimo e : emprestimos) {
+                System.out.println(e);
+            }
+        } else {
+            System.out.println("Não existem emprestimos cadastrados.");
         }
         System.out.println("Pressione enter para continuar...");
         entrada.nextLine();

@@ -40,7 +40,9 @@ public class ReservarLivro implements Command {
 
                 System.out.println("Livro reservado com sucesso!");
                 System.out.println("Fila de reservas para este livro: ");
-                reservaDAO.listReserva();
+                for (Reserva r : reservaDAO.listReserva()) {
+                    System.out.println(r);
+                }
 
             } else {
                 System.out.println("Este livro está disponível para empréstimo.");

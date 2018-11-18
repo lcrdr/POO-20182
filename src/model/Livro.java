@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Livro {
-    private int codigo;
-    private String titulo;
-    private int prioridade;
+    private int codigo = 0;
+    private String titulo = "";
+    private int prioridade = 0;
     private List<CategoriaLivro> categoria = new ArrayList<>();
-    private int ano;
-    private boolean disponibilidade;
+    private int ano = 0;
+    private boolean disponibilidade = true;
     private List<Autor> autor = new ArrayList<>();
 
     public int getCodigo() {

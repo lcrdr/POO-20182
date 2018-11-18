@@ -22,14 +22,21 @@ public class DevolverEmprestimo implements Command {
 
         List<Emprestimo> emprestimos = edao.listEmprestimo(usuario);
 
-        for(Emprestimo e : emprestimos){
-            System.out.println(e);
+        if (!emprestimos.isEmpty()) {
+            for (Emprestimo e : emprestimos) {
+                System.out.println(e);
+            }
+
+            System.out.println("Entre com o código do empréstimo a ser devolvido:");
+            Emprestimo emprestimo = edao.getEmprestimo(entrada.nextInt());
+            entrada.nextLine();
+
+            emprestimo.devolver();
+        } else {
+            System.out.println("Não existem emprestimos para este usuario");
+            entrada.nextLine();
         }
 
-        System.out.println("Entre com o código do empréstimo a ser devolvido:");
-        Emprestimo emprestimo = edao.getEmprestimo(entrada.nextInt());
-        entrada.nextLine();
 
-        emprestimo.devolver();
     }
 }

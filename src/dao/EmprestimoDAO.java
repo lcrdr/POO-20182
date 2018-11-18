@@ -13,6 +13,7 @@ import java.util.List;
 public class EmprestimoDAO {
     public void insert(Emprestimo emprestimo) {
         Connection conn = ConnectionFactory.getConnection();
+        Connection conn2 = ConnectionFactory.getConnection();
         try {
             String sql = "INSERT INTO Emprestimo(dataemprestimo, datadevolucao, codigolivro, codigousuario) VALUES (?, ?, ?, ?)";
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -22,13 +23,20 @@ public class EmprestimoDAO {
             ps.setDate(2, dataDevolucao);
             ps.setInt(3, emprestimo.getLivro().getCodigo());
             ps.setInt(4, emprestimo.getUsuario().getCodigo());
-
             ps.executeUpdate();
+            conn.close();
+
+            String sql2 = "UPDATE Livro SET disponibilidade = false WHERE codigo = ?";
+            PreparedStatement ps2 = conn2.prepareStatement(sql2);
+            ps2.setInt(1, emprestimo.getLivro().getCodigo());
+            ps2.executeUpdate();
+            conn2.close();
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
             ConnectionFactory.close(conn);
+            ConnectionFactory.close(conn2);
         }
     }
 
@@ -66,7 +74,7 @@ public class EmprestimoDAO {
     public List<Emprestimo> listEmprestimo(Usuario usuario) {
         Connection conn = ConnectionFactory.getConnection();
         try {
-            String sql = "SELECT * FROM Emprestimo WHERE codigousuario = ?";
+            String sql = "SELECT * FROM Emprestimo WHERE codigousuario = ? AND devolvido = false AND deletado = false";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1,usuario.getCodigo());
 
@@ -121,6 +129,7 @@ public class EmprestimoDAO {
             Date dataDevolucao = Date.valueOf(emprestimo.getDataDevolucao());
             ps.setDate(2, dataDevolucao);
             ps.setBoolean(3, emprestimo.getDevolvido());
+            ps.setInt(4, emprestimo.getCodigo());
             ps.executeUpdate();
 
         } catch (SQLException e) {

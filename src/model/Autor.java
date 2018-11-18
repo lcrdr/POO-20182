@@ -1,8 +1,8 @@
 package model;
 
 public class Autor {
-    private int codigo;
-    private String nome;
+    private int codigo = 0;
+    private String nome = "";
 
     public int getCodigo() {
         return codigo;

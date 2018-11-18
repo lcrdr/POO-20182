@@ -3,6 +3,7 @@ package dao;
 import dao.proxy.EmprestimoDAOProxy;
 import dao.proxy.LivroDAOProxy;
 import dao.proxy.UsuarioDAOProxy;
+import model.Livro;
 import model.Multa;
 import model.Reserva;
 import model.Usuario;
@@ -184,13 +185,12 @@ public class ReservaDAO {
                 r.setId(rs.getInt(1));
                 LivroDAO livro = LivroDAOProxy.getInstance();
                 r.setLivro(livro.getLivro(rs.getInt(2)));
-                UsuarioDAO usuario = UsuarioDAOProxy.getInstance();
-                r.setUsuario(usuario.getUsuario(rs.getInt(3)));
+                UsuarioDAO usuarioDAO = UsuarioDAOProxy.getInstance();
+                r.setUsuario(usuarioDAO.getUsuario(rs.getInt(3)));
 
                 return r;
             }else{
                 Reserva r = new Reserva();
-                r.setId(0);
                 return r;
             }
 

@@ -1,10 +1,10 @@
 package model;
 
 public class Multa {
-    private int codigo;
-    private String descricao;
-    private double valor;
-    private Emprestimo emprestimo;
+    private int codigo = 0;
+    private String descricao = "";
+    private double valor = 0;
+    private Emprestimo emprestimo = new Emprestimo();
 
     public int getCodigo() {
         return codigo;

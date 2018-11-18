@@ -1,19 +1,21 @@
 package model;
 
+import model.categoriausuario.Bibliotecario;
 import model.categoriausuario.CategoriaUsuario;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Usuario {
-    private int codigo;
-    private String nome;
-    private boolean sexo;
-    private String endereco;
-    private String telefone;
-    private CategoriaUsuario categoriaUsuario;
-    private List<Multa> multas;
-    private String login;
-    private String senha;
+    private int codigo = 0;
+    private String nome = "";
+    private boolean sexo = false;
+    private String endereco = "";
+    private String telefone = "";
+    private CategoriaUsuario categoriaUsuario = new Bibliotecario();
+    private List<Multa> multas = new ArrayList<>();
+    private String login = "";
+    private String senha = "";
 
     public String getLogin() {
         return login;
