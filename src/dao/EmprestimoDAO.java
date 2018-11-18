@@ -13,7 +13,6 @@ import java.util.List;
 public class EmprestimoDAO {
     public void insert(Emprestimo emprestimo) {
         Connection conn = ConnectionFactory.getConnection();
-        Connection conn2 = ConnectionFactory.getConnection();
         try {
             String sql = "INSERT INTO Emprestimo(dataemprestimo, datadevolucao, codigolivro, codigousuario) VALUES (?, ?, ?, ?)";
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -24,26 +23,23 @@ public class EmprestimoDAO {
             ps.setInt(3, emprestimo.getLivro().getCodigo());
             ps.setInt(4, emprestimo.getUsuario().getCodigo());
             ps.executeUpdate();
-            conn.close();
 
             String sql2 = "UPDATE Livro SET disponibilidade = false WHERE codigo = ?";
-            PreparedStatement ps2 = conn2.prepareStatement(sql2);
+            PreparedStatement ps2 = conn.prepareStatement(sql2);
             ps2.setInt(1, emprestimo.getLivro().getCodigo());
             ps2.executeUpdate();
-            conn2.close();
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
             ConnectionFactory.close(conn);
-            ConnectionFactory.close(conn2);
         }
     }
 
     public List<Emprestimo> listEmprestimo() {
         Connection conn = ConnectionFactory.getConnection();
         try {
-            String sql = "SELECT * FROM Emprestimo WHERE deletado=FALSE";
+            String sql = "SELECT * FROM Emprestimo WHERE devolvido = false AND deletado=FALSE";
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             List<Emprestimo> emprestimos = new ArrayList<>();
@@ -71,10 +67,42 @@ public class EmprestimoDAO {
         }
     }
 
-    public List<Emprestimo> listEmprestimo(Usuario usuario) {
+    public List<Emprestimo> listEmprestimoPendente(Usuario usuario) {
         Connection conn = ConnectionFactory.getConnection();
         try {
             String sql = "SELECT * FROM Emprestimo WHERE codigousuario = ? AND devolvido = false AND deletado = false";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1,usuario.getCodigo());
+
+            ResultSet rs = ps.executeQuery();
+            List<Emprestimo> emprestimos = new ArrayList<>();
+            conn.close();
+
+            while (rs.next()) {
+                Emprestimo e = new Emprestimo();
+                e.setCodigo(rs.getInt(1));
+                e.setDataEmprestimo(rs.getDate(2).toLocalDate());
+                e.setDataDevolucao(rs.getDate(3).toLocalDate());
+                e.setDevolvido(rs.getBoolean(4));
+                LivroDAO lDAO = new LivroDAO();
+                e.setLivro(lDAO.getLivro(rs.getInt(5)));
+                e.setUsuario(usuario);
+                emprestimos.add(e);
+            }
+
+            return emprestimos;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            ConnectionFactory.close(conn);
+        }
+    }
+
+    public List<Emprestimo> listEmprestimo(Usuario usuario) {
+        Connection conn = ConnectionFactory.getConnection();
+        try {
+            String sql = "SELECT * FROM Emprestimo WHERE codigousuario = ? AND deletado = false";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1,usuario.getCodigo());
 
@@ -161,7 +189,7 @@ public class EmprestimoDAO {
 
                 return e;
             }else{
-                return null;
+                return new Emprestimo();
             }
 
         } catch (SQLException e) {

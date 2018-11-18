@@ -69,11 +69,10 @@ public class Emprestimo {
         devolvido = true;
 
         int atraso = dataDevolucao.compareTo(LocalDate.now()); //Se dataDevolucao < LocalDate.now() retorna negativo
-        Multa multa = new Multa();
         dataDevolucao = LocalDate.now();
 
         if(atraso < 0){
-            multa = new Multa(this,"Atraso no livro " + getLivro().getTitulo() + " no dia " + getDataDevolucao(), atraso);
+            Multa multa = new Multa(this,"Atraso no livro " + getLivro().getTitulo() + " no dia " + getDataDevolucao(), atraso);
             getUsuario().addMulta(multa);
             MultaDAO dao = MultaDAOProxy.getInstance();
             dao.insert(multa);

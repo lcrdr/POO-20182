@@ -1,6 +1,7 @@
 package dao;
 
 import dao.proxy.MultaDAOProxy;
+import model.Multa;
 import model.Usuario;
 import util.ComandosFlyweight;
 import util.ConnectionFactory;
@@ -124,12 +125,14 @@ public class UsuarioDAO {
                 u.setCategoriaUsuario(ComandosFlyweight.getInstance().getCategoria(rs.getInt(6)));
                 u.setLogin(rs.getString(7));
                 u.setSenha(rs.getString(8));
-                MultaDAO mdao = MultaDAOProxy.getInstance();
-                u.setMultas(mdao.listMulta(u));
 
+                MultaDAO mdao = MultaDAOProxy.getInstance();
+                List<Multa> multas = mdao.listMulta(u);
+                if (!multas.isEmpty())
+                    u.setMultas(multas);
                 return u;
             }else{
-                return null;
+                return new Usuario();
             }
 
         } catch (SQLException e) {
@@ -158,12 +161,14 @@ public class UsuarioDAO {
                 u.setCategoriaUsuario(ComandosFlyweight.getInstance().getCategoria(rs.getInt(6)));
                 u.setLogin(rs.getString(7));
                 u.setSenha(rs.getString(8));
-                MultaDAO mdao = MultaDAOProxy.getInstance();
-                u.setMultas(mdao.listMulta(u));
 
+                MultaDAO mdao = MultaDAOProxy.getInstance();
+                List<Multa> multas = mdao.listMulta(u);
+                if (!multas.isEmpty())
+                    u.setMultas(multas);
                 return u;
             }else{
-                return null;
+                return new Usuario();
             }
 
         } catch (SQLException e) {
@@ -201,7 +206,7 @@ public class UsuarioDAO {
             String sql = "SELECT * FROM Usuario WHERE login = ? AND senha = ? AND deletado=FALSE";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, login);
-            ps.setString(2,   senha);
+            ps.setString(2, senha);
             ResultSet rs = ps.executeQuery();
             conn.close();
 

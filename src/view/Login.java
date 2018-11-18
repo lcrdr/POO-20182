@@ -3,8 +3,8 @@ package view;
 import controller.comando.MenuBibliotecario;
 import controller.comando.MenuUsuario;
 import dao.UsuarioDAO;
+import dao.proxy.UsuarioDAOProxy;
 import model.Usuario;
-import model.categoriausuario.Bibliotecario;
 import util.Sessao;
 
 import java.util.Scanner;

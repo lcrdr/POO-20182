@@ -36,7 +36,17 @@ public class CadastrarEmprestimo implements Command {
 
             ReservaDAO reservaDAO = ReservaDAOProxy.getInstance();
 
-            Reserva reserva = reservaDAO.verificarFila(livro.getCodigo());
+            Reserva reserva = new Reserva();
+            int fila;
+
+            do {
+
+                reserva = reservaDAO.verificarFila(livro.getCodigo());
+                fila = reserva.getDataReserva().compareTo(LocalDate.now());
+                if (fila <= (-1))
+                    reservaDAO.concluirReserva(reserva); //conclui reserva que estiver a mais de 1 dia aguardando o usuario.
+
+            } while (fila == -1 || fila == 0);
 
             if ((usuario.getCodigo() == reserva.getUsuario().getCodigo() || reserva.getId() == 0) && livro.getDisponibilidade() == true) {
 
@@ -44,7 +54,8 @@ public class CadastrarEmprestimo implements Command {
 
                 dao.insert(emprestimo);
 
-                reservaDAO.concluirReserva(reserva);
+                if (usuario.getCodigo() == reserva.getUsuario().getCodigo())
+                    reservaDAO.concluirReserva(reserva); //conclui a reserva se existir alguma no nome do usuario.
 
                 System.out.println("Emprestimo registrado com sucesso.");
             }else if (livro.getDisponibilidade() == false){

@@ -16,7 +16,7 @@ public class MultaDAO {
     public void insert(Multa multa) {
         Connection conn = ConnectionFactory.getConnection();
         try {
-            String sql = "INSERT INTO Multa(codigoemprestimo, descricao, valor) VALUES (?, ?, ?)";
+            String sql = "INSERT INTO Multa(codigoemprestimo, descricao, valor) VALUES (?, ?, ?);";
             PreparedStatement ps = conn.prepareStatement(sql);
 
             ps.setInt(1, multa.getEmprestimo().getCodigo());
@@ -38,6 +38,7 @@ public class MultaDAO {
             String sql = "SELECT * FROM Multa WHERE deletado=FALSE";
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
+            conn.close();
             List<Multa> multas = new ArrayList<>();
             while (rs.next()) {
                 Multa m = new Multa();
@@ -49,7 +50,7 @@ public class MultaDAO {
                 multas.add(m);
             }
 
-            conn.close();
+
             return multas;
 
         } catch (SQLException e) {
@@ -62,10 +63,15 @@ public class MultaDAO {
     public List<Multa> listMulta(Usuario usuario) {
         Connection conn = ConnectionFactory.getConnection();
         try {
-            String sql = "SELECT M.* FROM (Multa M JOIN Emprestimo E ON M.codigoemprestimo = E.codigo) JOIN Usuario U ON E.codigousuario = U.codigo WHERE U.deletado=FALSE AND E.deletado=FALSE AND M.deletado=FALSE";
+            String sql = "SELECT M.* FROM ((Multa M JOIN Emprestimo E ON M.codigoemprestimo = E.codigo) " +
+                    "JOIN Usuario U ON E.codigousuario = U.codigo) " +
+                    "WHERE U.codigo = ? AND M.deletado = FALSE";
             PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, usuario.getCodigo());
             ResultSet rs = ps.executeQuery();
+            conn.close();
             List<Multa> multas = new ArrayList<>();
+
             while (rs.next()) {
                 Multa m = new Multa();
                 m.setCodigo(rs.getInt(1));
@@ -76,7 +82,6 @@ public class MultaDAO {
                 multas.add(m);
             }
 
-            conn.close();
             return multas;
 
         } catch (SQLException e) {
