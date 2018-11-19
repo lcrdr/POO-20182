@@ -11,9 +11,9 @@ Adicionais:<b>
 - Adicionar login e senha na classe/banco Usuario; OK
 - Não cadastrar livro sem autor/categoria; - OK
 - Unificar interface; OK
-- Reservar livro na data de devolução (criar fila de reserva por data de hora);
-- Implementar sistema de devolução de emprestimo;
-- Usuário não pode emprestar se estiver devendo (?);
+- Reservar livro na data de devolução (criar fila de reserva por data de hora); OK (pendente testar a fila ao realizar emprestimo))
+- Implementar sistema de devolução de emprestimo; OK
+- Usuário não pode emprestar se estiver devendo (?); OK
 - Só excluir usuário se todos os empréstimos estiverem devolvidos;
 - Só excluir livro se todos os empréstimos dele estiverem devolvidos (?).
   
@@ -44,7 +44,7 @@ funcionário, aluno, comunidade). Professores têm prazo de 15 dias. Funcionári
 12 dias. Alunos têm prazo de 20 dias. Pessoas da comunidade têm prazo de 8 dias.
 
 
-RF07 – o valor da multa será de $1 por dia de atraso se o livro for de prioridade baixa, se o livro
+<b>DONE</b> - RF07 – o valor da multa será de $1 por dia de atraso se o livro for de prioridade baixa, se o livro
 for de prioridade média será de $2 e se for de prioridade alta $3. Além disso será adicionado o
 valor de $0,5 por dia se o usuário for professor, $0,3 se for funcionário, $0,2 se for aluno e $0,1
 se for da comunidade.
@@ -70,7 +70,7 @@ usuários.
 possíveis: CSV, XML, JSON.
 
 
-RF14 – o sistema deve permitir ao usuário reservar livros que não estejam disponíveis.
+<b>DONE</b> - RF14 – o sistema deve permitir ao usuário reservar livros que não estejam disponíveis.
 
 
 Requisitos não funcionais
