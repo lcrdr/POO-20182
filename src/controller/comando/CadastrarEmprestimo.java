@@ -29,11 +29,19 @@ public class CadastrarEmprestimo implements Command {
             Livro livro = ldao.getLivro(entrada.nextInt());
             entrada.nextLine();
 
-            Emprestimo emprestimo = new Emprestimo(usuario, livro);
+            if(livro.getDisponibilidade()){
+                Emprestimo emprestimo = new Emprestimo(usuario, livro);
 
-            dao.insert(emprestimo);
+                dao.insert(emprestimo);
 
-            System.out.println("Emprestimo registrado com sucesso.");
+                livro.setDisponibilidade(false);
+                ldao.update(livro);
+
+                System.out.println("Emprestimo registrado com sucesso.");
+            }else {
+                System.out.println("O livro já está emprestado! Realizar reserva?");
+                //TODO reservar (verificar se o usuário já não tem o livro emprestado/reservado
+            }
         }else{
             System.out.println("O usuário não pode realizar empréstimos pois tem multas a pagar.");
         }

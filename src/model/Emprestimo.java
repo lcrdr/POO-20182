@@ -1,6 +1,10 @@
 package model;
 
+import dao.EmprestimoDAO;
+import dao.LivroDAO;
 import dao.MultaDAO;
+import dao.proxy.EmprestimoDAOProxy;
+import dao.proxy.LivroDAOProxy;
 import dao.proxy.MultaDAOProxy;
 
 import java.time.LocalDate;
@@ -58,6 +62,10 @@ public class Emprestimo {
         return devolvido;
     }
 
+    public String getDevolvidoString(){
+        return getDevolvido() ? "Devolvido" : "Não devolvido";
+    }
+
     public void setDevolvido(Boolean devolvido) {
         this.devolvido = devolvido;
     }
@@ -72,12 +80,19 @@ public class Emprestimo {
 
         if(atraso < 0){
             multa = new Multa(this,"Atraso no livro " + getLivro().getTitulo() + " no dia " + getDataDevolucao(), atraso);
+
+            getUsuario().addMulta(multa);
+            MultaDAO mdao = MultaDAOProxy.getInstance();
+
+            mdao.insert(multa);
         }
 
-        getUsuario().addMulta(multa);
-        MultaDAO dao = MultaDAOProxy.getInstance();
+        EmprestimoDAO edao = EmprestimoDAOProxy.getInstance();
+        edao.update(this);
 
-        dao.insert(multa);
+        getLivro().setDisponibilidade(true);
+        LivroDAO ldao = LivroDAOProxy.getInstance();
+        ldao.update(getLivro());
     }
 
     public Emprestimo() {
@@ -92,7 +107,7 @@ public class Emprestimo {
 
     @Override
     public String toString() {
-        return getCodigo() + " Emprestado por: " + getUsuario().getNome() + "\nLivro: " + getLivro().getTitulo() + "\nEmpréstimo em: " + getDataEmprestimo() + "\nDevolução: " + getDataDevolucao();
+        return getCodigo() + " Emprestado por: " + getUsuario().getNome() + "\nLivro: " + getLivro().getTitulo() + "\nEmpréstimo em: " + getDataEmprestimo() + "\nDevolução: " + getDataDevolucao() + "\n" + getDevolvidoString();
     }
 
 

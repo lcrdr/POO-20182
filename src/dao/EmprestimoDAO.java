@@ -47,9 +47,9 @@ public class EmprestimoDAO {
                 e.setLivro(lDAO.getLivro(rs.getInt(4)));
                 UsuarioDAO uDAO = new UsuarioDAO();
                 e.setUsuario(uDAO.getUsuario(rs.getInt(5)));
+                e.setDevolvido(rs.getBoolean(6));
                 emprestimos.add(e);
             }
-
 
             return emprestimos;
 
@@ -79,6 +79,7 @@ public class EmprestimoDAO {
                 LivroDAO lDAO = new LivroDAO();
                 e.setLivro(lDAO.getLivro(rs.getInt(4)));
                 e.setUsuario(usuario);
+                e.setDevolvido(rs.getBoolean(6));
                 emprestimos.add(e);
             }
 
@@ -106,16 +107,17 @@ public class EmprestimoDAO {
         }
     }
 
-
     public void update(Emprestimo emprestimo) {
         Connection conn = ConnectionFactory.getConnection();
         try {
-            String sql = "UPDATE Emprestimo SET dataemprestimo = ?, datadevolucao = ? WHERE codigo = ?";
+            String sql = "UPDATE Emprestimo SET dataemprestimo = ?, datadevolucao = ?, devolvido = ? WHERE codigo = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
             Date dataEmprestimo = Date.valueOf(emprestimo.getDataEmprestimo());
             ps.setDate(1, dataEmprestimo);
             Date dataDevolucao = Date.valueOf(emprestimo.getDataDevolucao());
             ps.setDate(2, dataDevolucao);
+            ps.setBoolean(3, emprestimo.getDevolvido());
+            ps.setInt(4, emprestimo.getCodigo());
             ps.executeUpdate();
 
         } catch (SQLException e) {
@@ -130,6 +132,7 @@ public class EmprestimoDAO {
         try {
             String sql = "SELECT * FROM Emprestimo WHERE codigo = ? AND deletado=FALSE";
             PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             conn.close();
 
@@ -138,10 +141,11 @@ public class EmprestimoDAO {
                 e.setCodigo(rs.getInt(1));
                 e.setDataEmprestimo(rs.getDate(2).toLocalDate());
                 e.setDataDevolucao(rs.getDate(3).toLocalDate());
-                /*LivroDAO lDAO = new LivroDAO();
-                e.setLivro(lDAO.getLivro(rs.getInt(4)));*/
-                /*UsuarioDAO uDAO = new UsuarioDAO();
-                e.setUsuario(uDAO.getUsuario(rs.getInt(5)));*/
+                LivroDAO lDAO = new LivroDAO();
+                e.setLivro(lDAO.getLivro(rs.getInt(4)));
+                UsuarioDAO uDAO = new UsuarioDAO();
+                e.setUsuario(uDAO.getUsuario(rs.getInt(5)));
+                e.setDevolvido(rs.getBoolean(6));
 
                 return e;
             }else{

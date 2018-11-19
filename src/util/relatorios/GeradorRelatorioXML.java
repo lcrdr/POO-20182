@@ -95,7 +95,7 @@ public class GeradorRelatorioXML implements GeradorRelatorio {
             sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Empréstimos>");
 
             for(Emprestimo e : emprestimos){
-                sb.append("\n<Empréstimo>\n<Código>" + e.getCodigo() + "</Código>\n<Data_Empréstimo>" + e.getDataEmprestimo() + "</Data_Empréstimo>\n<Data_Devolução>" + e.getDataDevolucao() + "</Data_Devolução>\n<Livro>\n<Código>" + e.getLivro().getCodigo() + "</Código>\n<Título>" + e.getLivro().getTitulo() + "</Título>\n<Prioridade>" + e.getLivro().getPrioridadeString() + "</Prioridade>\n<Ano>" + e.getLivro().getAno() + "</Ano>\n<Disponibilidade>" + e.getLivro().getDisponibilidadeString() + "</Disponibilidade>\n<Categorias>");
+                sb.append("\n<Empréstimo>\n<Código>" + e.getCodigo() + "</Código>\n<Data_Empréstimo>" + e.getDataEmprestimo() + "</Data_Empréstimo>\n<Data_Devolução>" + e.getDataDevolucao() + "</Data_Devolução>\n<Situação>" + e.getDevolvidoString() + "</Situação>\n<Livro>\n<Código>" + e.getLivro().getCodigo() + "</Código>\n<Título>" + e.getLivro().getTitulo() + "</Título>\n<Prioridade>" + e.getLivro().getPrioridadeString() + "</Prioridade>\n<Ano>" + e.getLivro().getAno() + "</Ano>\n<Disponibilidade>" + e.getLivro().getDisponibilidadeString() + "</Disponibilidade>\n<Categorias>");
                 for(CategoriaLivro c : e.getLivro().getCategoria()){
                     sb.append("\n<Categoria>\n<Código>" + c.getCodigo() + "</Código>\n<Nome>" + c.getNome() + "</Nome>\n</Categoria>");
                 }
