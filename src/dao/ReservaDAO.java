@@ -10,6 +10,7 @@ import model.Usuario;
 import util.ConnectionFactory;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,6 +49,7 @@ public class ReservaDAO {
                 r.setLivro(livro.getLivro(rs.getInt(2)));
                 UsuarioDAO usuario = UsuarioDAOProxy.getInstance();
                 r.setUsuario(usuario.getUsuario(rs.getInt(3)));
+                r.setDataReserva(rs.getDate(4).toLocalDate());
                 reservas.add(r);
             }
 
@@ -128,7 +130,7 @@ public class ReservaDAO {
                 r.setLivro(livro.getLivro(rs.getInt(2)));
                 UsuarioDAO usuario = UsuarioDAOProxy.getInstance();
                 r.setUsuario(usuario.getUsuario(rs.getInt(3)));
-
+                r.setDataReserva(rs.getDate(4).toLocalDate());
                 return r;
             }else{
                 return null;
@@ -158,7 +160,7 @@ public class ReservaDAO {
                 r.setLivro(livro.getLivro(rs.getInt(2)));
                 UsuarioDAO usuario = UsuarioDAOProxy.getInstance();
                 r.setUsuario(usuario.getUsuario(rs.getInt(3)));
-
+                r.setDataReserva(rs.getDate(4).toLocalDate());
                 return r;
             }else{
                 return null;
@@ -187,6 +189,7 @@ public class ReservaDAO {
                 r.setLivro(livro.getLivro(rs.getInt(2)));
                 UsuarioDAO usuarioDAO = UsuarioDAOProxy.getInstance();
                 r.setUsuario(usuarioDAO.getUsuario(rs.getInt(3)));
+                r.setDataReserva(rs.getDate(4).toLocalDate());
 
                 return r;
             }else{

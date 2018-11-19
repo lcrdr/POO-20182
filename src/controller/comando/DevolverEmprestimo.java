@@ -22,6 +22,7 @@ public class DevolverEmprestimo implements Command {
 
         List<Emprestimo> emprestimos = edao.listEmprestimoPendente(usuario);
 
+
         if (!emprestimos.isEmpty()) {
             for (Emprestimo e : emprestimos) {
                 System.out.println(e);

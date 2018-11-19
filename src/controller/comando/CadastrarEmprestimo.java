@@ -40,13 +40,14 @@ public class CadastrarEmprestimo implements Command {
             int fila;
 
             do {
-
                 reserva = reservaDAO.verificarFila(livro.getCodigo());
                 fila = reserva.getDataReserva().compareTo(LocalDate.now());
+                System.out.println(fila);
                 if (fila <= (-1))
                     reservaDAO.concluirReserva(reserva); //conclui reserva que estiver a mais de 1 dia aguardando o usuario.
-
-            } while (fila == -1 || fila == 0);
+                if (reserva.getId() == 0)
+                    break;
+            } while (fila < -1);
 
             if ((usuario.getCodigo() == reserva.getUsuario().getCodigo() || reserva.getId() == 0) && livro.getDisponibilidade() == true) {
 

@@ -18,6 +18,7 @@ public class PagarMulta implements Command{
 
         System.out.println("Entre com o id do usuário:");
         Usuario usuario = udao.getUsuario(entrada.nextInt());
+        usuario.setMultas(mdao.listMulta(usuario));
         entrada.nextLine();
 
         for(Multa m : usuario.getMultas()){

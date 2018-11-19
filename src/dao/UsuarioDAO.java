@@ -126,10 +126,8 @@ public class UsuarioDAO {
                 u.setLogin(rs.getString(7));
                 u.setSenha(rs.getString(8));
 
-                MultaDAO mdao = MultaDAOProxy.getInstance();
-                List<Multa> multas = mdao.listMulta(u);
-                if (!multas.isEmpty())
-                    u.setMultas(multas);
+//                MultaDAO mdao = MultaDAOProxy.getInstance();
+//                u.setMultas(mdao.listMulta(u));
                 return u;
             }else{
                 return new Usuario();
@@ -162,10 +160,8 @@ public class UsuarioDAO {
                 u.setLogin(rs.getString(7));
                 u.setSenha(rs.getString(8));
 
-                MultaDAO mdao = MultaDAOProxy.getInstance();
-                List<Multa> multas = mdao.listMulta(u);
-                if (!multas.isEmpty())
-                    u.setMultas(multas);
+//                MultaDAO mdao = MultaDAOProxy.getInstance();
+//                u.setMultas(mdao.listMulta(u));
                 return u;
             }else{
                 return new Usuario();
