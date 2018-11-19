@@ -13,5 +13,9 @@ public class RemoverLivro implements Command {
         System.out.println("Entre com o código do livro a ser removido:");
         dao.remove(entrada.nextInt());
         entrada.nextLine();
+        System.out.println("Livro removido com sucesso.");
+
+        System.out.println("Pressione enter para continuar...");
+        entrada.nextLine();
     }
 }

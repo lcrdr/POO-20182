@@ -30,6 +30,8 @@ public class PagarMulta implements Command{
         entrada.nextLine();
 
         System.out.println("Multa paga com sucesso!");
+
+        System.out.println("Pressione enter para continuar...");
         entrada.nextLine();
     }
 }

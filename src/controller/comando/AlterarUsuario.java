@@ -36,5 +36,10 @@ public class AlterarUsuario implements Command {
 
         entrada.nextLine();
         dao.update(usuario);
+
+        System.out.println("Usuario alterado com sucesso.");
+
+        System.out.println("Pressione enter para continuar...");
+        entrada.nextLine();
     }
 }

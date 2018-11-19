@@ -68,5 +68,8 @@ public class CadastrarLivro implements Command {
 
         dao.insert(livro);
         System.out.println("Livro cadastrado com sucesso!");
+
+        System.out.println("Pressione enter para continuar...");
+        entrada.nextLine();
     }
 }

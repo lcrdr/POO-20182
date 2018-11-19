@@ -22,5 +22,9 @@ public class AlterarLivro implements Command {
         livro.setAno(entrada.nextInt());
         entrada.nextLine();
         dao.update(livro);
+        System.out.println("Livro atualizado com sucesso.");
+
+        System.out.println("Pressione enter para continuar...");
+        entrada.nextLine();
     }
 }

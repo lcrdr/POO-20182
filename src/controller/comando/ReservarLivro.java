@@ -45,8 +45,11 @@ public class ReservarLivro implements Command {
                 }
 
             } else {
-                System.out.println("Este livro está disponível para empréstimo.");
+                System.out.println("Não é possivel fazer uma reserva pois este livro está disponível para empréstimo.");
             }
+
+            System.out.println("Pressione enter para continuar...");
+            entrada.nextLine();
         }
     }
 }

@@ -15,6 +15,10 @@ public class CadastrarAutor implements Command {
         System.out.println("Entre com o nome do autor:");
         autor.setNome(entrada.nextLine());
         dao.insert(autor);
+        System.out.println("Auto cadastrado com sucesso.");
+
+        System.out.println("Pressione enter para continuar...");
+        entrada.nextLine();
     }
 
 }

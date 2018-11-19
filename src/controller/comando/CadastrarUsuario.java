@@ -63,5 +63,8 @@ public class CadastrarUsuario implements Command {
 
         dao.insert(usuario);
         System.out.println("Usuario cadastrado com sucesso.");
+
+        System.out.println("Pressione enter para continuar...");
+        entrada.nextLine();
     }
 }

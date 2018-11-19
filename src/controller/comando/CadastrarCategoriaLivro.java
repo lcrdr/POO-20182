@@ -14,5 +14,11 @@ public class CadastrarCategoriaLivro implements Command {
         System.out.println("Entre com o nome da categoria:");
         categoriaLivro.setNome(entrada.nextLine());
         dao.insert(categoriaLivro);
+        System.out.println("Categoria cadastrada com sucesso.");
+
+        System.out.println("Pressione enter para continuar...");
+        entrada.nextLine();
     }
+
+
 }

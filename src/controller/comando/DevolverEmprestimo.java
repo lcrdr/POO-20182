@@ -35,9 +35,10 @@ public class DevolverEmprestimo implements Command {
             emprestimo.devolver();
         } else {
             System.out.println("Não existem emprestimos para este usuario");
-            entrada.nextLine();
         }
 
+        System.out.println("Pressione enter para continuar...");
+        entrada.nextLine();
 
     }
 }

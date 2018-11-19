@@ -12,5 +12,10 @@ public class RemoverUsuario implements Command {
         System.out.println("Entre com o código do usuário a ser removido:");
         dao.remove(entrada.nextInt());
         entrada.nextLine();
+
+        System.out.println("Usuario removido com sucesso.");
+
+        System.out.println("Pressione enter para continuar...");
+        entrada.nextLine();
     }
 }
