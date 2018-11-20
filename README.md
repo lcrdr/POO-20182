@@ -14,8 +14,8 @@ Adicionais:<b>
 - Reservar livro na data de devolução (criar fila de reserva por data de hora); OK (pendente testar a fila ao realizar emprestimo))
 - Implementar sistema de devolução de emprestimo; OK
 - Usuário não pode emprestar se estiver devendo (?); OK
-- Só excluir usuário se todos os empréstimos estiverem devolvidos;
-- Só excluir livro se todos os empréstimos dele estiverem devolvidos (?).
+- Só excluir usuário se todos os empréstimos estiverem devolvidos; OK
+- Só excluir livro se todos os empréstimos dele estiverem devolvidos (?). OK
   
 </b>
 
@@ -31,7 +31,7 @@ sexo, categoria, endereço e telefone.
 código do livro, código do usuário, data de empréstimo e data de devolução.
 
 
-RF04 – o sistema deve permitir ao bibliotecário cadastrar multas contendo código, código do
+<b>DONE</b> - RF04 – o sistema deve permitir ao bibliotecário cadastrar multas contendo código, código do
 cliente, descrição e valor.
 
 
