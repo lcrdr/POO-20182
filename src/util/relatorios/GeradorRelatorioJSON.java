@@ -99,7 +99,7 @@ public final class GeradorRelatorioJSON implements GeradorRelatorio {
             sb.append("{\n\"Empréstimos\" : [\n");
 
             for(Emprestimo e : emprestimos){
-                sb.append("{\n\"Código\": " + e.getCodigo() + ",\n\"Data Empréstimo\": \"" + e.getDataEmprestimo() + "\",\n\"Data Devolução\": \"" + e.getDataDevolucao() + "\",\n\"Livro\": [\n{\n\"Código\": " + e.getLivro().getCodigo() + ",\n\"Título\": \"" + e.getLivro().getTitulo() + "\",\n\"Prioridade\": \"" + e.getLivro().getPrioridadeString() + "\",\n\"Ano\": " + e.getLivro().getAno() + ",\n\"Disponibilidade\": \"" + e.getLivro().getDisponibilidadeString() + "\",\n\"Categoria(s)\": [\n");
+                sb.append("{\n\"Código\": " + e.getCodigo() + ",\n\"Data Empréstimo\": \"" + e.getDataEmprestimo() + "\",\n\"Data Devolução\": \"" + e.getDataDevolucao() + "\",\n\"Situação\": \"" + e.getDevolvidoString() + "\",\n\"Livro\": [\n{\n\"Código\": " + e.getLivro().getCodigo() + ",\n\"Título\": \"" + e.getLivro().getTitulo() + "\",\n\"Prioridade\": \"" + e.getLivro().getPrioridadeString() + "\",\n\"Ano\": " + e.getLivro().getAno() + ",\n\"Disponibilidade\": \"" + e.getLivro().getDisponibilidadeString() + "\",\n\"Categoria(s)\": [\n");
                 for(CategoriaLivro c : e.getLivro().getCategoria()){
                     sb.append("{\n\"Código\": " + c.getCodigo() + ",\n\"Nome\": \"" + c.getNome() + "\"\n},\n");
                 }

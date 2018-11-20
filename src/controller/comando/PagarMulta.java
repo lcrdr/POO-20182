@@ -21,15 +21,19 @@ public class PagarMulta implements Command{
         usuario.setMultas(mdao.listMulta(usuario));
         entrada.nextLine();
 
-        for(Multa m : usuario.getMultas()){
-            System.out.println(m);
+        if(!(usuario.getMultas().isEmpty())){
+            for(Multa m : usuario.getMultas()){
+                System.out.println(m);
+            }
+
+            System.out.println("Entre com o id da multa a pagar:");
+            mdao.remove(entrada.nextInt());
+            entrada.nextLine();
+
+            System.out.println("Multa paga com sucesso!");
+        }else {
+            System.out.println("Não há multa a pagar!");
         }
-
-        System.out.println("Entre com o id da multa a pagar:");
-        mdao.remove(entrada.nextInt());
-        entrada.nextLine();
-
-        System.out.println("Multa paga com sucesso!");
 
         System.out.println("Pressione enter para continuar...");
         entrada.nextLine();

@@ -61,6 +61,10 @@ public class Emprestimo {
         return devolvido;
     }
 
+    public String getDevolvidoString(){
+        return getDevolvido() ? "Devolvido" : "Não devolvido";
+    }
+
     public void setDevolvido(Boolean devolvido) {
         this.devolvido = devolvido;
     }
@@ -98,7 +102,7 @@ public class Emprestimo {
 
     @Override
     public String toString() {
-        return "------------------\n" + getCodigo() + " Emprestado por: " + getUsuario().getNome() + "\nLivro: " + getLivro().getTitulo() + "\nEmpréstimo em: " + getDataEmprestimo() + "\nDevolução: " + getDataDevolucao() + "\n";
+        return "------------------\n" + getCodigo() + " Emprestado por: " + getUsuario().getNome() + "\nLivro: " + getLivro().getTitulo() + "\nEmpréstimo em: " + getDataEmprestimo() + "\nDevolução: " + getDataDevolucao() + "\n" + "Situação: " + getDevolvidoString() + "\n";
     }
 
 

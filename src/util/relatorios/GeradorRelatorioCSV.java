@@ -84,10 +84,10 @@ public class GeradorRelatorioCSV implements GeradorRelatorio {
             PrintWriter pw = new PrintWriter(new File("relatorioEmprestimos.csv"));
             StringBuilder sb = new StringBuilder();
 
-            sb.append("Código,Data Empréstimo,Data Devolução,Livro,Usuário\n");
+            sb.append("Código,Data Empréstimo,Data Devolução,Livro,Usuário,Situação\n");
 
             for(Emprestimo e : emprestimos){
-                sb.append("\"" + e.getCodigo() + "\",\"" + e.getDataEmprestimo() + "\",\"" + e.getDataDevolucao() + "\",\"" + e.getLivro().getTitulo() + "\",\"" + e.getUsuario().getNome() + "\"\n");
+                sb.append("\"" + e.getCodigo() + "\",\"" + e.getDataEmprestimo() + "\",\"" + e.getDataDevolucao() + "\",\"" + e.getLivro().getTitulo() + "\",\"" + e.getUsuario().getNome() + "\",\"" + e.getDevolvidoString() + "\"\n");
             }
 
             pw.write(sb.toString());

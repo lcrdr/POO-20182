@@ -33,7 +33,6 @@ public class CadastrarEmprestimo implements Command {
             Livro livro = ldao.getLivro(entrada.nextInt());
             entrada.nextLine();
 
-
             ReservaDAO reservaDAO = ReservaDAOProxy.getInstance();
 
             Reserva reserva = new Reserva();
@@ -42,7 +41,6 @@ public class CadastrarEmprestimo implements Command {
             do {
                 reserva = reservaDAO.verificarFila(livro.getCodigo());
                 fila = reserva.getDataReserva().compareTo(LocalDate.now());
-                System.out.println(fila);
                 if (fila <= (-1))
                     reservaDAO.concluirReserva(reserva); //conclui reserva que estiver a mais de 1 dia aguardando o usuario.
                 if (reserva.getId() == 0)
