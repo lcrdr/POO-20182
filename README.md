@@ -11,7 +11,7 @@ Adicionais:<b>
 - Adicionar login e senha na classe/banco Usuario; OK
 - Não cadastrar livro sem autor/categoria; - OK
 - Unificar interface; OK
-- Reservar livro na data de devolução (criar fila de reserva por data de hora); OK (pendente testar a fila ao realizar emprestimo))
+- Reservar livro na data de devolução (criar fila de reserva por data de hora); OK
 - Implementar sistema de devolução de emprestimo; OK
 - Usuário não pode emprestar se estiver devendo (?); OK
 - Só excluir usuário se todos os empréstimos estiverem devolvidos; OK
