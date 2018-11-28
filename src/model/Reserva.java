@@ -51,6 +51,6 @@ public class Reserva {
 
     @Override
     public String toString() {
-        return getId() + " - Livro: " + getLivro().getTitulo() + "\n Usuario: " + getUsuario().getNome();
+        return "Código: " + getId() + "\nLivro: " + getLivro().getTitulo() + "\nUsuario: " + getUsuario().getNome() + "\nData da retirada: " + getDataReserva() + "\n\n";
     }
 }

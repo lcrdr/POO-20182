@@ -35,6 +35,6 @@ public class CategoriaLivro {
 
     @Override
     public String toString() {
-        return getCodigo() + " " + getNome();
+        return "Código: " + getCodigo() + "\n Nome: " + getNome() + "\n\n";
     }
 }

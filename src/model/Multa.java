@@ -53,7 +53,7 @@ public class Multa {
 
     @Override
     public String toString() {
-        return getCodigo() + "\n" + getDescricao() + "\n" + getValor();
+        return "Código: " + getCodigo() + "\nDescrição: " + getDescricao() + "\nValor: " + getValor() + "\n\n";
     }
 
     @Override

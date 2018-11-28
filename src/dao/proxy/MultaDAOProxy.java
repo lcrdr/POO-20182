@@ -9,7 +9,7 @@ public class MultaDAOProxy extends MultaDAO {
     private static MultaDAOProxy instance;
     private List<Multa> cache;
 
-    private MultaDAOProxy() { }
+    public MultaDAOProxy() { }
 
     @Override
     public void insert(Multa multa) {

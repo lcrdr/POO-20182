@@ -119,7 +119,7 @@ public class Livro {
 
     @Override
     public String toString() {
-        return "Codigo:" + getCodigo() + "\n" + "Titulo:" + getTitulo() + "\n" + "Categoria(s):" + getCategoria() + "\n" +  "Autor(es):" + getAutor() + "\n" + "Ano:" + getAno() + "\n" + getDisponibilidadeString();
+        return "Codigo: " + getCodigo() + "\n" + "Titulo:" + getTitulo() + "\n" + "Categoria(s):" + getCategoria() + "\n" +  "Autor(es):" + getAutor() + "\n" + "Ano:" + getAno() + "\nSituação: " + getDisponibilidadeString() + "\n\n";
     }
 
 }

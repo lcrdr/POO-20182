@@ -108,6 +108,7 @@ public class UsuarioDAO {
 
     public Usuario getUsuario(int id) {
         Connection conn = ConnectionFactory.getConnection();
+        MultaDAO mdao = MultaDAOProxy.getInstance();
         try {
             String sql = "SELECT * FROM Usuario WHERE codigo = ? AND deletado=FALSE";
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -125,9 +126,7 @@ public class UsuarioDAO {
                 u.setCategoriaUsuario(ComandosFlyweight.getInstance().getCategoria(rs.getInt(6)));
                 u.setLogin(rs.getString(7));
                 u.setSenha(rs.getString(8));
-
-//                MultaDAO mdao = MultaDAOProxy.getInstance();
-//                u.setMultas(mdao.listMulta(u));
+                //u.setMultas(mdao.listMulta(u));
                 return u;
             }else{
                 return new Usuario();
@@ -142,6 +141,7 @@ public class UsuarioDAO {
 
     public Usuario getUsuario(String login) {
         Connection conn = ConnectionFactory.getConnection();
+        MultaDAO mdao = MultaDAOProxy.getInstance();
         try {
             String sql = "SELECT * FROM Usuario WHERE login = ? AND deletado=FALSE";
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -160,8 +160,7 @@ public class UsuarioDAO {
                 u.setLogin(rs.getString(7));
                 u.setSenha(rs.getString(8));
 
-//                MultaDAO mdao = MultaDAOProxy.getInstance();
-//                u.setMultas(mdao.listMulta(u));
+                //u.setMultas(mdao.listMulta(u));
                 return u;
             }else{
                 return new Usuario();

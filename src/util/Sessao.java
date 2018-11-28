@@ -1,5 +1,7 @@
 package util;
 
+import dao.MultaDAO;
+import dao.proxy.MultaDAOProxy;
 import model.Usuario;
 
 public class Sessao {
@@ -8,6 +10,8 @@ public class Sessao {
     }
 
     public static void setUsuarioLogado(Usuario usuarioLogado) {
+        MultaDAO multaDAO = new MultaDAOProxy();
+        usuarioLogado.setMultas(multaDAO.listMulta(usuarioLogado));
         Sessao.usuarioLogado = usuarioLogado;
     }
 

@@ -102,7 +102,7 @@ public class Emprestimo {
 
     @Override
     public String toString() {
-        return "------------------\n" + getCodigo() + " Emprestado por: " + getUsuario().getNome() + "\nLivro: " + getLivro().getTitulo() + "\nEmpréstimo em: " + getDataEmprestimo() + "\nDevolução: " + getDataDevolucao() + "\n" + "Situação: " + getDevolvidoString() + "\n";
+        return "------------------\nCódigo: " + getCodigo() + "\nEmprestado por: " + getUsuario().getNome() + "\nLivro: " + getLivro().getTitulo() + "\nEmpréstimo em: " + getDataEmprestimo() + "\nDevolução: " + getDataDevolucao() + "\n" + "Situação: " + getDevolvidoString() + "\n";
     }
 
 

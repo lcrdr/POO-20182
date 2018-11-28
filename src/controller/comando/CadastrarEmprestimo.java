@@ -1,13 +1,7 @@
 package controller.comando;
 
-import dao.EmprestimoDAO;
-import dao.LivroDAO;
-import dao.ReservaDAO;
-import dao.UsuarioDAO;
-import dao.proxy.EmprestimoDAOProxy;
-import dao.proxy.LivroDAOProxy;
-import dao.proxy.ReservaDAOProxy;
-import dao.proxy.UsuarioDAOProxy;
+import dao.*;
+import dao.proxy.*;
 import model.Emprestimo;
 import model.Livro;
 import model.Reserva;
@@ -23,9 +17,11 @@ public class CadastrarEmprestimo implements Command {
         UsuarioDAO udao = UsuarioDAOProxy.getInstance();
         LivroDAO ldao = LivroDAOProxy.getInstance();
         EmprestimoDAO dao = EmprestimoDAOProxy.getInstance();
+        MultaDAO mdao = MultaDAOProxy.getInstance();
 
         System.out.println("Entre com o id do usuário:");
         Usuario usuario = udao.getUsuario(entrada.nextInt());
+        usuario.setMultas(mdao.listMulta(usuario));
         entrada.nextLine();
 
         if(usuario.getMultas().isEmpty()){
