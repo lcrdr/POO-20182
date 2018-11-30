@@ -37,15 +37,15 @@ public class GeradorRelatorioXML implements GeradorRelatorio {
             sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Livros>");
 
             for(Livro l : livros){
-                sb.append("\n<Livro>\n<Código>" + l.getCodigo() + "</Código>\n<Título>" + l.getTitulo() + "</Título>\n<Prioridade>" + l.getPrioridadeString() + "</Prioridade>\n<Ano>" + l.getAno() + "</Ano>\n<Disponibilidade>" + l.getDisponibilidadeString() + "</Disponibilidade>\n<Categorias>");
+                sb.append("\n\t<Livro>\n\t\t<Código>" + l.getCodigo() + "</Código>\n\t\t<Título>" + l.getTitulo() + "</Título>\n\t\t<Prioridade>" + l.getPrioridadeString() + "</Prioridade>\n\t\t<Ano>" + l.getAno() + "</Ano>\n\t\t<Disponibilidade>" + l.getDisponibilidadeString() + "</Disponibilidade>\n\t\t<Categorias>");
                 for(CategoriaLivro c : l.getCategoria()){
-                    sb.append("\n<Categoria>\n<Código>" + c.getCodigo() + "</Código>\n<Nome>" + c.getNome() + "</Nome>\n</Categoria>");
+                    sb.append("\n\t\t\t<Categoria>\n\t\t\t\t<Código>" + c.getCodigo() + "</Código>\n\t\t\t\t<Nome>" + c.getNome() + "</Nome>\n\t\t\t</Categoria>");
                 }
-                sb.append("</Categorias>\n<Autores>");
+                sb.append("\n\t\t</Categorias>\n\t\t<Autores>");
                 for(Autor a : l.getAutor()){
-                    sb.append("\n<Autor>\n<Código>" + a.getCodigo() + "</Código>\n<Nome>" + a.getNome() + "</Nome>\n</Autor>");
+                    sb.append("\n\t\t\t<Autor>\n\t\t\t\t<Código>" + a.getCodigo() + "</Código>\n\t\t\t\t<Nome>" + a.getNome() + "</Nome>\n\t\t\t</Autor>");
                 }
-                sb.append("</Autores>\n</Livro>");
+                sb.append("\n\t\t</Autores>\n\t</Livro>");
             }
 
             sb.append("\n</Livros>");
@@ -70,7 +70,7 @@ public class GeradorRelatorioXML implements GeradorRelatorio {
             sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Usuários>");
 
             for(Usuario u : usuarios){
-                sb.append("\n<Usuário>\n<Código>" + u.getCodigo() + "</Código>\n<Nome>" + u.getNome() + "</Nome>\n<Sexo>" + u.getSexoString() + "</Sexo>\n<Endereço>" + u.getEndereco() + "</Endereço>\n<Telefone>" + u.getTelefone() + "</Telefone>\n<Categoria>" + u.getCategoriaUsuario() + "</Categoria>\n</Usuário>");
+                sb.append("\n\t<Usuário>\n\t\t<Código>" + u.getCodigo() + "</Código>\n\t\t<Nome>" + u.getNome() + "</Nome>\n\t\t<Sexo>" + u.getSexoString() + "</Sexo>\n\t\t<Endereço>" + u.getEndereco() + "</Endereço>\n\t\t<Telefone>" + u.getTelefone() + "</Telefone>\n\t\t<Categoria>" + u.getCategoriaUsuario() + "</Categoria>\n\t</Usuário>");
             }
 
             sb.append("\n</Usuários>");
@@ -95,15 +95,15 @@ public class GeradorRelatorioXML implements GeradorRelatorio {
             sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Empréstimos>");
 
             for(Emprestimo e : emprestimos){
-                sb.append("\n<Empréstimo>\n<Código>" + e.getCodigo() + "</Código>\n<Data_Empréstimo>" + e.getDataEmprestimo() + "</Data_Empréstimo>\n<Data_Devolução>" + e.getDataDevolucao() + "</Data_Devolução>\n<Situação>" + e.getDevolvidoString() + "</Situação>\n<Livro>\n<Código>" + e.getLivro().getCodigo() + "</Código>\n<Título>" + e.getLivro().getTitulo() + "</Título>\n<Prioridade>" + e.getLivro().getPrioridadeString() + "</Prioridade>\n<Ano>" + e.getLivro().getAno() + "</Ano>\n<Disponibilidade>" + e.getLivro().getDisponibilidadeString() + "</Disponibilidade>\n<Categorias>");
+                sb.append("\n\t<Empréstimo>\n\t\t<Código>" + e.getCodigo() + "</Código>\n\t\t<Data_Empréstimo>" + e.getDataEmprestimo() + "</Data_Empréstimo>\n\t\t<Data_Devolução>" + e.getDataDevolucao() + "</Data_Devolução>\n\t\t<Situação>" + e.getDevolvidoString() + "</Situação>\n\t\t<Livro>\n\t\t\t<Código>" + e.getLivro().getCodigo() + "</Código>\n\t\t\t<Título>" + e.getLivro().getTitulo() + "</Título>\n\t\t\t<Prioridade>" + e.getLivro().getPrioridadeString() + "</Prioridade>\n\t\t\t<Ano>" + e.getLivro().getAno() + "</Ano>\n\t\t\t<Disponibilidade>" + e.getLivro().getDisponibilidadeString() + "</Disponibilidade>\n\t\t\t<Categorias>");
                 for(CategoriaLivro c : e.getLivro().getCategoria()){
-                    sb.append("\n<Categoria>\n<Código>" + c.getCodigo() + "</Código>\n<Nome>" + c.getNome() + "</Nome>\n</Categoria>");
+                    sb.append("\n\t\t\t\t<Categoria>\n\t\t\t\t\t<Código>" + c.getCodigo() + "</Código>\n\t\t\t\t\t<Nome>" + c.getNome() + "</Nome>\n\t\t\t\t</Categoria>");
                 }
-                sb.append("</Categorias>\n<Autores>");
+                sb.append("\n\t\t\t</Categorias>\n\t\t\t<Autores>");
                 for(Autor a : e.getLivro().getAutor()){
-                    sb.append("\n<Autor>\n<Código>" + a.getCodigo() + "</Código>\n<Nome>" + a.getNome() + "</Nome>\n</Autor>");
+                    sb.append("\n\t\t\t\t<Autor>\n\t\t\t\t\t<Código>" + a.getCodigo() + "</Código>\n\t\t\t\t\t<Nome>" + a.getNome() + "</Nome>\n\t\t\t\t</Autor>");
                 }
-                sb.append("</Autores>\n</Livro>\n<Usuário>\n<Código>" + e.getUsuario().getCodigo() + "</Código>\n<Nome>" + e.getUsuario().getNome() + "</Nome>\n<Sexo>" + e.getUsuario().getSexoString() + "</Sexo>\n<Endereço>" + e.getUsuario().getEndereco() + "</Endereço>\n<Telefone>" + e.getUsuario().getTelefone() + "</Telefone>\n<Categoria>" + e.getUsuario().getCategoriaUsuario() + "</Categoria>\n</Usuário>\n</Empréstimo>");
+                sb.append("\n\t\t\t</Autores>\n\t\t</Livro>\n\t\t<Usuário>\n\t\t\t<Código>" + e.getUsuario().getCodigo() + "</Código>\n\t\t\t<Nome>" + e.getUsuario().getNome() + "</Nome>\n\t\t\t<Sexo>" + e.getUsuario().getSexoString() + "</Sexo>\n\t\t\t<Endereço>" + e.getUsuario().getEndereco() + "</Endereço>\n\t\t\t<Telefone>" + e.getUsuario().getTelefone() + "</Telefone>\n\t\t\t<Categoria>" + e.getUsuario().getCategoriaUsuario() + "</Categoria>\n\t\t</Usuário>\n\t</Empréstimo>");
             }
 
             sb.append("\n</Empréstimos>");

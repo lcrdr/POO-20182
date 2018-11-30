@@ -36,23 +36,23 @@ public final class GeradorRelatorioJSON implements GeradorRelatorio {
             PrintWriter pw = new PrintWriter(new File("relatorioLivros.json"));
             StringBuilder sb = new StringBuilder();
 
-            sb.append("{\n\"Livros\" : [\n");
+            sb.append("{\n\t\"Livros\" : [\n");
 
             for(Livro l : livros){
-                sb.append("{\n\"Código\": " + l.getCodigo() + ",\n\"Título\": \"" + l.getTitulo() + "\",\n\"Prioridade\": \"" + l.getPrioridadeString() + "\",\n\"Ano\": " + l.getAno() + ",\n\"Disponibilidade\": \"" + l.getDisponibilidadeString() + "\",\n\"Categoria(s)\": [\n");
+                sb.append("\t\t{\n\t\t\t\"Código\": " + l.getCodigo() + ",\n\t\t\t\"Título\": \"" + l.getTitulo() + "\",\n\t\t\t\"Prioridade\": \"" + l.getPrioridadeString() + "\",\n\t\t\t\"Ano\": " + l.getAno() + ",\n\t\t\t\"Disponibilidade\": \"" + l.getDisponibilidadeString() + "\",\n\t\t\t\"Categoria(s)\": [\n");
                 for(CategoriaLivro c : l.getCategoria()){
-                    sb.append("{\n\"Código\": " + c.getCodigo() + ",\n\"Nome\": \"" + c.getNome() + "\"\n},\n");
+                    sb.append("\t\t\t\t{\n\t\t\t\t\t\"Código\": " + c.getCodigo() + ",\n\t\t\t\t\t\"Nome\": \"" + c.getNome() + "\"\n\t\t\t\t},\n");
                 }
                 sb.deleteCharAt(sb.length() - 2);
-                sb.append("],\n\"Autor(es)\": [\n");
+                sb.append("\t\t\t],\n\t\t\t\"Autor(es)\": [\n");
                 for(Autor a : l.getAutor()){
-                    sb.append("{\n\"Código\": " + a.getCodigo() + ",\n\"Nome\": \"" + a.getNome() + "\"\n},\n");
+                    sb.append("\t\t\t\t{\n\t\t\t\t\t\"Código\": " + a.getCodigo() + ",\n\t\t\t\t\t\"Nome\": \"" + a.getNome() + "\"\n\t\t\t\t},\n");
                 }
                 sb.deleteCharAt(sb.length() - 2);
-                sb.append("]\n},");
+                sb.append("\t\t\t]\n\t\t},\n");
             }
-            sb.deleteCharAt(sb.length() - 1);
-            sb.append("]\n}");
+            sb.deleteCharAt(sb.length() - 2);
+            sb.append("\t]\n}");
 
             pw.write(sb.toString());
             pw.close();
@@ -71,13 +71,13 @@ public final class GeradorRelatorioJSON implements GeradorRelatorio {
             PrintWriter pw = new PrintWriter(new File("relatorioUsuarios.json"));
             StringBuilder sb = new StringBuilder();
 
-            sb.append("{\n\"Usuários\" : [\n");
+            sb.append("{\n\t\"Usuários\" : [\n");
 
             for(Usuario u : usuarios){
-                sb.append("{\n\"Código\": " + u.getCodigo() + ",\n\"Nome\": \"" + u.getNome() + "\",\n\"Sexo\": \"" + u.getSexoString() + "\",\n\"Endereço\": \"" + u.getEndereco() + "\",\n\"Telefone\": \"" + u.getTelefone() + "\",\n\"Categoria\": \"" + u.getCategoriaUsuario() + "\"\n},\n");
+                sb.append("\t\t{\n\t\t\t\"Código\": " + u.getCodigo() + ",\n\t\t\t\"Nome\": \"" + u.getNome() + "\",\n\t\t\t\"Sexo\": \"" + u.getSexoString() + "\",\n\t\t\t\"Endereço\": \"" + u.getEndereco() + "\",\n\t\t\t\"Telefone\": \"" + u.getTelefone() + "\",\n\t\t\t\"Categoria\": \"" + u.getCategoriaUsuario() + "\"\n\t\t},\n");
             }
             sb.deleteCharAt(sb.length() - 2);
-            sb.append("]\n}");
+            sb.append("\t]\n}");
 
             pw.write(sb.toString());
             pw.close();
@@ -96,23 +96,23 @@ public final class GeradorRelatorioJSON implements GeradorRelatorio {
             PrintWriter pw = new PrintWriter(new File("relatorioEmprestimos.json"));
             StringBuilder sb = new StringBuilder();
 
-            sb.append("{\n\"Empréstimos\" : [\n");
+            sb.append("{\n\t\"Empréstimos\" : [\n");
 
             for(Emprestimo e : emprestimos){
-                sb.append("{\n\"Código\": " + e.getCodigo() + ",\n\"Data Empréstimo\": \"" + e.getDataEmprestimo() + "\",\n\"Data Devolução\": \"" + e.getDataDevolucao() + "\",\n\"Situação\": \"" + e.getDevolvidoString() + "\",\n\"Livro\": [\n{\n\"Código\": " + e.getLivro().getCodigo() + ",\n\"Título\": \"" + e.getLivro().getTitulo() + "\",\n\"Prioridade\": \"" + e.getLivro().getPrioridadeString() + "\",\n\"Ano\": " + e.getLivro().getAno() + ",\n\"Disponibilidade\": \"" + e.getLivro().getDisponibilidadeString() + "\",\n\"Categoria(s)\": [\n");
+                sb.append("\t\t{\n\t\t\t\"Código\": " + e.getCodigo() + ",\n\t\t\t\"Data Empréstimo\": \"" + e.getDataEmprestimo() + "\",\n\t\t\t\"Data Devolução\": \"" + e.getDataDevolucao() + "\",\n\t\t\t\"Situação\": \"" + e.getDevolvidoString() + "\",\n\t\t\t\"Livro\": [\n\t\t\t\t{\n\t\t\t\t\t\"Código\": " + e.getLivro().getCodigo() + ",\n\t\t\t\t\t\"Título\": \"" + e.getLivro().getTitulo() + "\",\n\t\t\t\t\t\"Prioridade\": \"" + e.getLivro().getPrioridadeString() + "\",\n\t\t\t\t\t\"Ano\": " + e.getLivro().getAno() + ",\n\t\t\t\t\t\"Disponibilidade\": \"" + e.getLivro().getDisponibilidadeString() + "\",\n\t\t\t\t\t\"Categoria(s)\": [\n");
                 for(CategoriaLivro c : e.getLivro().getCategoria()){
-                    sb.append("{\n\"Código\": " + c.getCodigo() + ",\n\"Nome\": \"" + c.getNome() + "\"\n},\n");
+                    sb.append("\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"Código\": " + c.getCodigo() + ",\n\t\t\t\t\t\t\t\"Nome\": \"" + c.getNome() + "\"\n\t\t\t\t\t\t},\n");
                 }
                 sb.deleteCharAt(sb.length() - 2);
-                sb.append("],\n\"Autor(es)\": [\n");
+                sb.append("\t\t\t\t\t],\n\t\t\t\t\t\"Autor(es)\": [\n");
                 for(Autor a : e.getLivro().getAutor()){
-                    sb.append("{\n\"Código\": " + a.getCodigo() + ",\n\"Nome\": \"" + a.getNome() + "\"\n},\n");
+                    sb.append("\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"Código\": " + a.getCodigo() + ",\n\t\t\t\t\t\t\t\"Nome\": \"" + a.getNome() + "\"\n\t\t\t\t\t\t},\n");
                 }
                 sb.deleteCharAt(sb.length() - 2);
-                sb.append("]\n}\n],\n\"Usuário\": [\n{\n\"Código\": " + e.getUsuario().getCodigo() + ",\n\"Nome\": \"" + e.getUsuario().getNome() + "\",\n\"Sexo\": \"" + e.getUsuario().getSexoString() + "\",\n\"Endereço\": \"" + e.getUsuario().getEndereco() + "\",\n\"Telefone\": \"" + e.getUsuario().getTelefone() + "\",\n\"Categoria\": \"" + e.getUsuario().getCategoriaUsuario() + "\"\n}\n]\n},\n");
+                sb.append("\t\t\t\t\t]\n\t\t\t\t}\n\t\t\t],\n\t\t\t\"Usuário\": [\n\t\t\t\t{\n\t\t\t\t\t\"Código\": " + e.getUsuario().getCodigo() + ",\n\t\t\t\t\t\"Nome\": \"" + e.getUsuario().getNome() + "\",\n\t\t\t\t\t\"Sexo\": \"" + e.getUsuario().getSexoString() + "\",\n\t\t\t\t\t\"Endereço\": \"" + e.getUsuario().getEndereco() + "\",\n\t\t\t\t\t\"Telefone\": \"" + e.getUsuario().getTelefone() + "\",\n\t\t\t\t\t\"Categoria\": \"" + e.getUsuario().getCategoriaUsuario() + "\"\n\t\t\t\t}\n\t\t\t]\n\t\t},\n");
             }
             sb.deleteCharAt(sb.length() - 2);
-            sb.append("]\n}");
+            sb.append("\t]\n}");
 
             pw.write(sb.toString());
             pw.close();
