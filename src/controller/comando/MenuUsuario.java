@@ -22,7 +22,10 @@ public class MenuUsuario implements Command {
             System.out.println("Escolha uma opção:");
             opcao = entrada.nextInt();
             entrada.nextLine();
-            comandos.get(opcao).execute(entrada);
+
+            if(comandos.get(opcao) != null){
+                comandos.get(opcao).execute(entrada);
+            }
 
         } while (opcao != 0);
 

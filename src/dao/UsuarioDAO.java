@@ -49,9 +49,9 @@ public class UsuarioDAO {
                 u.setSexo(rs.getBoolean(3));
                 u.setEndereco(rs.getString(4));
                 u.setTelefone(rs.getString(5));
-                u.setLogin(rs.getString(6));
-                u.setSenha(rs.getString(7));
                 u.setCategoriaUsuario(ComandosFlyweight.getInstance().getCategoria(rs.getInt(6)));
+                u.setLogin(rs.getString(7));
+                u.setSenha(rs.getString(8));
                 MultaDAO mdao = MultaDAOProxy.getInstance();
                 u.setMultas(mdao.listMulta(u));
 

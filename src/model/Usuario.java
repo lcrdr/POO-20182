@@ -118,7 +118,7 @@ public class Usuario {
     public String toString() {
         return "Código: " + getCodigo() + "\n" + "Nome: " + getNome() + "\n" + "Sexo: " + getSexoString() + "\n" +
                 "Endereço: " + getEndereco() + "\n" + "Telefone: " + getTelefone() + "\n" +
-                "Categoria: " + categoriaUsuario + "\n" + "Login: " + getLogin() + "\n" + "Senha: " + getSenha() + "\n\n";
+                "Categoria: " + categoriaUsuario + "\n" + "Login: " + getLogin() + "\n\n";
     }
 
 }

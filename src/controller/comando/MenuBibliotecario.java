@@ -27,9 +27,10 @@ public class MenuBibliotecario implements Command{
         comandos.put(12, new ConsultarEmprestimos());
 
         comandos.put(13, new DevolverEmprestimo());
-        comandos.put(14, new PagarMulta());
+        comandos.put(14, new ConsultarMultas());
+        comandos.put(15, new PagarMulta());
 
-        comandos.put(15, new GerarRelatorio());
+        comandos.put(16, new GerarRelatorio());
 
         do {
 
@@ -51,14 +52,18 @@ public class MenuBibliotecario implements Command{
             System.out.println("11 - Cadastrar Empréstimo");
             System.out.println("12 - Consultar Empréstimo");
             System.out.println("13 - Devolver Empréstimo");
-            System.out.println("14 - Pagar Multa");
+            System.out.println("14 - Consultar Multas");
+            System.out.println("15 - Pagar Multa");
             System.out.println("\n<-- Relatórios -->");
-            System.out.println("15 - Gerar relatórios");
+            System.out.println("16 - Gerar relatórios");
             System.out.println("\nEscolha uma opção:");
 
             opcao = entrada.nextInt();
             entrada.nextLine();
-            comandos.get(opcao).execute(entrada);
+
+            if(comandos.get(opcao) != null){
+                comandos.get(opcao).execute(entrada);
+            }
 
         } while (opcao != 0);
 
