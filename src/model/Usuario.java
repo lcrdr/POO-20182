@@ -116,9 +116,9 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Código: " + getCodigo() + "\n" + "Nome: " + getNome() + "\n" + "Sexo: " + getSexoString() + "\n" +
-                "Endereço: " + getEndereco() + "\n" + "Telefone: " + getTelefone() + "\n" +
-                "Categoria: " + categoriaUsuario + "\n" + "Login: " + getLogin() + "\n\n";
+        return "<--------->\nCódigo: " + getCodigo() + "\nNome: " + getNome() + "\nSexo: " + getSexoString() +
+                "\nEndereço: " + getEndereco() + "\nTelefone: " + getTelefone() +
+                "\nCategoria: " + categoriaUsuario + "\nLogin: " + getLogin();
     }
 
 }

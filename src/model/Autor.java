@@ -35,6 +35,6 @@ public class Autor {
 
     @Override
     public String toString() {
-        return "Código: " + getCodigo() + "\n Nome: " + getNome() + "\n\n";
+        return "Código: " + getCodigo() + " | Nome: " + getNome();
     }
 }

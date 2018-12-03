@@ -15,7 +15,6 @@ public class ConsultarMultas implements Command {
         List<Multa> multas = dao.listMulta();
         for(Multa m : multas) {
             System.out.println(m);
-            System.out.println("\n");
         }
         System.out.println("Pressione enter para continuar...");
         entrada.nextLine();

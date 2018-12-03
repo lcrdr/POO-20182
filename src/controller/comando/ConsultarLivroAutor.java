@@ -17,7 +17,6 @@ public class ConsultarLivroAutor implements Command {
         List<Livro> livros = dao.listLivro(id);
         for(Livro l : livros) {
             System.out.println(l);
-            System.out.println("\n");
         }
         System.out.println("Pressione enter para continuar...");
         entrada.nextLine();
